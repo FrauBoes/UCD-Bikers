@@ -1,0 +1,216 @@
+/*
+THEME NAME: UCD Bikers
+DESCRIPTION: Dublin bikes real-time data visualized
+VERSION: 0.1
+ADAPTED FROM: https://medialoot.com/blog/how-to-code-a-homepage-template-with-html5-and-css3/
+*/
+
+/* Global styles */
+body {
+    background-color: #fff;
+    color: #777;
+    font: normal 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+p {
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-weight: 300;
+    color: #444;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-weight: 300;
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #444;
+}
+
+a:hover {
+    color: #02b8dd;
+}
+
+/* might not be needed in which case it can be removed */
+/* due to using a CSS reset, attributes strong and small  need to defined. */
+strong {
+    font-weight: bold;
+}
+
+small {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
+/* clear class style, prevents other elements from being affected by float*/
+.clear {
+    clear: both;
+}
+
+/* wrapper class style to control width of elements */
+.wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 940px;
+}
+
+/* nav-bar styles */
+nav {
+    text-align: center;
+    padding: 15px;
+    font-family: 'Roboto', serif;
+}
+
+nav a {
+    color: #fff;
+    font-size: 15px;
+    padding: 3%;
+}
+
+/* header styles */
+header {
+    background-color: #444;
+    height: 50px;
+}
+
+/* search bar styles*/
+#search-bar {
+    height: 50px;
+    padding-top: 1px;
+    background: #e6e6e6;
+}
+
+/* search form styles */
+#search-form {
+    display: block;
+}
+
+#search-form .current-location-button, .search-button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+#search-form img {
+    display: inline-block;
+    margin-top: 7px;
+}
+
+#search-form input {
+    display: inline-block;
+    height: 30px;
+    width: 180px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 15px;
+    text-align: center;
+    margin: 7px 15px;
+    font-family: 'Roboto', serif;
+}
+
+/* weather-bar styles */ 
+#weather-bar {
+    height: 100px;
+    padding-top: 1px;
+    background: #e8eced;
+}
+
+#weather-bar h2 {
+    margin: 20px 0 10px 0;
+}
+
+/* traffic-bar styles */ 
+#traffic-bar {
+    height: 100px;
+    padding-top: 1px;
+    background: #e8ece0;
+}
+
+#traffic-bar h2 {
+    margin: 20px 0 10px 0;
+}
+
+/* main block style */
+#main-block {
+    height: 500px;
+    padding: 60px 0;
+    text-align: left;
+    background-color: #f5f5f5;
+}
+
+/* station-list styles */
+#station-list {
+    width: 30%;
+    float: left;
+    height: 100%;
+}
+
+/* station-top styles */
+.station-top h3 {
+    color: #02b8dd;
+}
+
+/* station-other styles */
+.station-top li, .station-other li {
+    list-style: circle;
+    list-style-position: inside;
+    padding: 2px;
+}
+
+.station-other {
+    border-top: 1px solid #02b8dd;
+    margin-right: 40px;
+}
+
+/* map styles */
+#map {
+    float: left;
+    height: 100%;
+    width: 70%;
+}
+
+#map iframe {
+    height: 520px;
+    width: 720px;
+}
+
+/* footer styles */
+footer {
+    padding: 15px;
+    background: #e6e6e6;
+    font-family: 'Roboto', serif;
+}
+
+/* footer-info styles */
+#footer-info {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* footer-links styles */
+#footer-links {
+    font-size: 15px;
+    text-align: center;
+}
+
+#footer-links li {
+    list-style: none;
+    display: inline;
+    padding: 3%;
+}
