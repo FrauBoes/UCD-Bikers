@@ -117,7 +117,6 @@ header {
     height: 30px;
     width: 180px;
     border-radius: 20px;
-    border: 0;
     font-size: 15px;
     text-align: center;
     margin: 7px 15px;
@@ -210,7 +209,6 @@ footer {
 }
 
 #footer-links li {
-    list-style: none;
     display: inline;
     padding: 3%;
 }
