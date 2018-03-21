@@ -1,0 +1,2 @@
+recursive-include bikers/templates *
+recursive-include bikers/static *

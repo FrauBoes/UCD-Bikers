@@ -1,7 +1,16 @@
 eclipse.preferences.version=1
 encoding//bikers/app.py=utf-8
 encoding//bikers/commands.py=utf-8
+encoding//bikers/compat.py=utf-8
+encoding//bikers/database.py=utf-8
+encoding//bikers/extensions.py=utf-8
+encoding//bikers/public/__init__.py=utf-8
 encoding//bikers/public/forms.py=utf-8
 encoding//bikers/public/views.py=utf-8
+encoding//bikers/settings.py=utf-8
+encoding//bikers/user/__init__.py=utf-8
+encoding//bikers/user/forms.py=utf-8
+encoding//bikers/user/models.py=utf-8
+encoding//bikers/user/views.py=utf-8
 encoding//bikers/utils.py=utf-8
 encoding/autoapp.py=utf-8
