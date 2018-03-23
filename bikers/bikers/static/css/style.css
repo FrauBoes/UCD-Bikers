@@ -18,39 +18,39 @@ p {
 }
 
 h2 {
-    font-weight: 300;
     color: #444;
+    font-weight: 300;
     font-size: 30px;
-    text-align: center;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 h3 {
+    color: #444;
     font-weight: 300;
     font-size: 20px;
-    color: #444;
     margin-bottom: 10px;
     padding-top: 10px;
 }
 
 a {
-    text-decoration: none;
     color: #444;
+    text-decoration: none;
 }
 
 a:hover {
     color: #02b8dd;
 }
 
-/* might not be needed in which case it can be removed */
-/* due to using a CSS reset, attributes strong and small  need to defined. */
+/* the following styles might not be needed in which case it can be removed */
+/* due to using a CSS reset, attributes strong and small need to defined. */
 strong {
     font-weight: bold;
 }
 
 small {
-    font-size: 13px;
     color: #777;
+    font-size: 13px;
     font-style: italic;
 }
 
@@ -68,9 +68,9 @@ small {
 
 /* nav-bar styles */
 nav {
-    text-align: center;
-    padding: 15px;
     font-family: 'Roboto', serif;
+    padding: 15px;
+    text-align: center;
 }
 
 nav a {
@@ -87,9 +87,9 @@ header {
 
 /* search bar styles*/
 #search-bar {
+    background: #e6e6e6;
     height: 50px;
     padding-top: 1px;
-    background: #e6e6e6;
 }
 
 /* search form styles */
@@ -98,13 +98,13 @@ header {
 }
 
 #search-form .current-location-button, .search-button {
+    background-color: #fff;
+    border-radius: 4px;
     display: inline-block;
-    width: 30px;
     height: 30px;
     text-align: center;
     vertical-align: middle;
-    border-radius: 4px;
-    background-color: #fff;
+    width: 30px;
 }
 
 #search-form img {
@@ -113,21 +113,22 @@ header {
 }
 
 #search-form input {
+	border-radius: 20px;
+    border: none;
     display: inline-block;
-    height: 30px;
-    width: 180px;
-    border-radius: 20px;
-    font-size: 15px;
-    text-align: center;
-    margin: 7px 15px;
     font-family: 'Roboto', serif;
+    font-size: 15px;
+    height: 30px;
+    margin: 7px 15px;
+    text-align: center;
+    width: 180px;
 }
 
 /* weather-bar styles */ 
 #weather-bar {
+	background: #e8eced;
     height: 100px;
     padding-top: 1px;
-    background: #e8eced;
 }
 
 #weather-bar h2 {
@@ -136,9 +137,9 @@ header {
 
 /* traffic-bar styles */ 
 #traffic-bar {
+    background: #e8ece0;
     height: 100px;
     padding-top: 1px;
-    background: #e8ece0;
 }
 
 #traffic-bar h2 {
@@ -147,17 +148,17 @@ header {
 
 /* main block style */
 #main-block {
+    background-color: #f5f5f5;
     height: 500px;
     padding: 60px 0;
     text-align: left;
-    background-color: #f5f5f5;
 }
 
 /* station-list styles */
 #station-list {
-    width: 30%;
     float: left;
     height: 100%;
+    width: 30%;
 }
 
 /* station-top styles */
@@ -191,9 +192,9 @@ header {
 
 /* footer styles */
 footer {
-    padding: 15px;
     background: #e6e6e6;
     font-family: 'Roboto', serif;
+    padding: 15px;
 }
 
 /* footer-info styles */
