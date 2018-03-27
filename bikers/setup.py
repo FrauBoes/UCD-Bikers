@@ -8,6 +8,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'flask', 'pytest',
-    ],
+        'flask',
+        'pymysql','pytest',],
 )
