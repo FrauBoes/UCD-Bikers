@@ -45,12 +45,11 @@
             <h2>Weather bar</h2>
             {{ weather | safe }}
     </div>
-    
-    <div id="traffic-bar">
-            <h2>Traffic bar</h2>
-            <p id="db"></p> 
-    </div>
-    
+  
+    <div>
+    {% include "occupancy.html" %}
+    <?div>
+
     <div id="main-block">
         <div class="wrapper">
             <div id="station-list">
