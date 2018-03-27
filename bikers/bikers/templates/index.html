@@ -46,9 +46,9 @@
             {{ weather | safe }}
     </div>
   
-    <div>
-    {% include "occupancy.html" %}
-    <?div>
+    <div id="occupancy-bar">
+    	<p>test</p>
+    </div>
 
     <div id="main-block">
         <div class="wrapper">
@@ -171,7 +171,7 @@
 		 	xhttp.onreadystatechange = function(){
 		 		if (this.readyState == 4 && this.status == 200){
 		 			console.log(this.responseText)
-		 			document.getElementById("db").innerHTML=this.responseText;
+		 			document.getElementById("occupancy-bar").innerHTML=this.responseText;
 		 			}
 		 		};
 		 	xhttp.open("GET","getdetail?num=number",true);

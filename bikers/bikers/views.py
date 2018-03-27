@@ -19,5 +19,9 @@ def index():
 @app.route('/getdetail')
 def query():
     number = request.args.get('num')
+    occupancy_graph(number)
     #print(getDB.getDB(number))
-    return getDB.getDB(number)
+    return occupancy_graph(number)
+
+def occupancy_graph(number):
+    return render_template('occupancy.html', number=number)
