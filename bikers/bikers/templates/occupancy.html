@@ -1,9 +1,7 @@
-{% raw %}
-{% extends "index.html" %}
-
 {% block content %}
 
- 	{{ number }}
-
+	<h2>
+ 	{{ data | safe }}
+	</h2>
+	
 {% endblock %}
-{% endraw %}

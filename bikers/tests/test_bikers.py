@@ -1,8 +1,5 @@
 import pytest
-
 import bikers
-
-
 
 class BikersTestCase(object):
 
@@ -12,5 +9,6 @@ class BikersTestCase(object):
     def test_index(self):
         pass
 
-    def test_occupancy(self):
-        assert bikers.views.occupancy_graph(37) is not None;
+
+def test_occupancy(self):
+    assert bikers.views.occupancy_graph(37) is not None;

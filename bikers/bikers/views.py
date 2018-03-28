@@ -24,4 +24,5 @@ def query():
     return occupancy_graph(number)
 
 def occupancy_graph(number):
-    return render_template('occupancy.html', number=number)
+    occupancy_data = getDB.get_station_occupancy(number)
+    return render_template('occupancy.html', data=occupancy_data)
