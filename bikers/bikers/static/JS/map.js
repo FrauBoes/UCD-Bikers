@@ -1,5 +1,4 @@
 
-<script>
 // script to draw circle on the screen
 function initMap(){
 	//initialize the google map and set the center
@@ -12,7 +11,7 @@ function initMap(){
 			position: {lat:53.3439118,lng:-6.2658777},
 			customInfo: "2",
 			icon:{
-			url: "{{ url_for('static', filename='images/self.png') }}",
+			url: "{{ url_for('static', filename='images/bike_stand.png') }}",
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map
 		});
@@ -112,5 +111,3 @@ function hideAllInfoWindow(markers,map){
 		marker.infowindow.close(map,marker);
 	});
 }
-
-</script>

@@ -13,7 +13,8 @@ def initStations():
     number=[]
     bikes_stands =[]
     available_bikes =[]
-    
+    category=[]
+
     for s in bikesInfo:
         number.append(s['number'])
         #name = s['name']
@@ -21,12 +22,25 @@ def initStations():
         locations.append(s['position'])
         bikes_stands.append(s['bike_stands'])
         available_bikes.append(s['available_bikes'])
-    return locations,number,bikes_stands,available_bikes
+        ava = s['available_bikes']/s['bike_stands']
+        if(s['status'] == 'CLOSED'):
+            category.append(4)
+        else:
+            if(ava==0):
+                category.append(0)
+            elif(ava <=0.3):
+                category.append(1)
+            elif(ava > 0.3 and ava <= 0.6):
+                category.append(2)
+            else:
+                category.append(3)
+    return locations,number,bikes_stands,available_bikes,category
 
 def topStation(stations):
     #  find the top station which has the most bikes.
     pass
-    
+
+ 
 
 if __name__=="__main__":
     print(initStations())
