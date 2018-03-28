@@ -1,10 +1,7 @@
-{% raw %}
-{% extends "index.html" %}
-
 {% block content %}
-<div id="occupancy-bar">
-    <h2>Placeholder Occupancy bar</h2>
- 	{{ safe|occupancy }}
-</div>
+
+	<h2>
+ 	{{ data | safe }}
+	</h2>
+	
 {% endblock %}
-{% endraw %}

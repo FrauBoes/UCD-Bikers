@@ -1,3 +1,4 @@
 {
+  "tests/bikers_tests.py": true,
   "tests/test_bikers.py": true
 }
