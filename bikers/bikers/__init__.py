@@ -3,7 +3,7 @@ from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object('bikers.default_settings')
-app.config.from_envvar('BIKERS_SETTINGS')
+# app.config.from_envvar('BIKERS_SETTINGS')
 
 if not app.debug:
     import logging

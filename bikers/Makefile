@@ -9,8 +9,8 @@ venv:
 run: venv
 	FLASK_APP=bikers BIKERS_SETTINGS=../settings.cfg venv/bin/python -m flask run
 
-test: venv
-	BIKERS_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
+// test: venv
+// 	BIKERS_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
 
 sdist: venv test
 	venv/bin/python setup.py sdist
