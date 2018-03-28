@@ -63,7 +63,7 @@ small {
 .wrapper {
     margin: 0 auto;
     padding: 0 10px;
-    width: 940px;
+    width: 90%;
     display:flex;
     fiex-direction:row;
 }
@@ -124,7 +124,6 @@ header {
     margin: 7px 15px;
     font-family: 'Roboto', serif;
 }
-
 /* weather-bar styles */ 
 #weather-bar {
     height: 100px;
@@ -141,6 +140,7 @@ header {
     height: 100px;
     padding-top: 1px;
     background: #e8ece0;
+    margin: 5% 0;
 }
 
 #traffic-bar h2 {
