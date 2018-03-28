@@ -19,7 +19,10 @@ class BikersTestCase(unittest.TestCase):
 
     def test_occupancy(self):
         assert bikers.views.occupancy_graph(37) is not None;
+        
+    def test_bucket_occupancy(self):
+        assert bikers.getDB.get_timeframe('1520453795000') is (3, 20, 1)
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
+#     import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
