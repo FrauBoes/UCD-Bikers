@@ -133,6 +133,7 @@ function initMap(){
  		if (this.readyState == 4 && this.status == 200){
  			console.log(this.responseText);
  			document.getElementById("occupancy-bar").innerHTML=this.responseText;
+ 			console.log(this.responseText);
  			}
  		};
  	xhttp.open("GET","getdetail?num="+number,true);
