@@ -13,7 +13,7 @@ from . import getDB
 def index():
     app.logger.warning('sample message')
     locations, number,bike_stands,available_bikes =getStationsAPI.initStations()
-    weather = getWeatherAPI.weatherbroadcast();
+    weather = getWeatherAPI.getWeather();
     
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather)
 

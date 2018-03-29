@@ -17,19 +17,19 @@ function showPosition(position) {
     document.getElementById("pos").innerHTML = "Latitude: " + position.coords.latitude +"<br>Longitude" +position.coords.longitude;
 }
 
-function resetVals() {
-	var xmlhttp = new XMLHttpRequest();
-	var url = "http://api.openweathermap.org/data/2.5/forecast?id=2964574&APPID=31f19a108384bc317e2d91c5621c791e";
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			//Parse the JSON data to a JavaScript variable. 
-			var myArr = JSON.parse(xmlhttp.responseText);
-			// This function is defined below and deals with the JSON data read from the file. 
-			myFunction(myArr);
-		}
-	}
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
+//function resetVals() {
+//	var xmlhttp = new XMLHttpRequest();
+//	var url = "http://api.openweathermap.org/data/2.5/forecast?id=2964574&APPID=31f19a108384bc317e2d91c5621c791e";
+//	xmlhttp.onreadystatechange = function() {
+//		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//			//Parse the JSON data to a JavaScript variable. 
+//			var myArr = JSON.parse(xmlhttp.responseText);
+//			// This function is defined below and deals with the JSON data read from the file. 
+//			myFunction(myArr);
+//		}
+//	}
+//	xmlhttp.open("GET", url, true);
+//	xmlhttp.send();
     
     function myFunction(obj) {
                 
