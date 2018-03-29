@@ -9,23 +9,37 @@ dbname="BikeData"
 user = "bikerz"
 password="bikerz123"
 
+<<<<<<< HEAD
 # host = "localhost"
 # user = "root"
 # password = "112358"
 # dbname = "test_Dublinbikers"
+=======
+#host = "localhost"
+#user = "root"
+#assword = "112358"
+#dbname = "test_Dublinbikers"
+>>>>>>> map
 
 
     
 def getDB(number):
     #lat = location["lat"]
     #lan = number
-    conn = pymysql.connect(host, user=user, passwd=password,db=dbname)
+    conn = pymysql.connect(host=host, user=user, port=port, passwd=password,db=dbname)
     cursor = conn.cursor()
     
-    #sql = """SELECT STATUS FROM BIKEDATA WHERE STATION_NUMBER = {} """.format(number)
+    print(number)
     
+<<<<<<< HEAD
     sql = """SELECT available_bikes, store_time, status FROM BikeData WHERE number = {} ORDER BY store_time DESC LIMIT 3""".format(number)
 
+=======
+    sql = """SELECT NUMBER_OF_STANDS, NUMBER_OF_BIKES, STATUS, TIME FROM BIKEDATA WHERE STATION_NUMBER = {} ORDER BY TIME DESC LIMIT 10""".format(int(number))
+    
+    #sql = """SELECT available_bikes, store_time, status FROM realtimebikes WHERE number = {} ORDER BY store_time DESC LIMIT 3""".format(number)
+    
+>>>>>>> map
     cursor.execute(sql)
     
     data=cursor.fetchall()

@@ -9,5 +9,5 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask',
-        'pymysql','pytest',],
+        'pymysql','pytest','geopy'],
 )
