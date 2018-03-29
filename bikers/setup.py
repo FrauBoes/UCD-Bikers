@@ -9,5 +9,9 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask',
+<<<<<<< HEAD
+        'pymysql'],
+=======
         'pymysql','pytest','geopy'],
+>>>>>>> refs/remotes/origin/master
 )

@@ -1,14 +1,30 @@
-import pytest
+import os
+from bikers import bikers  
+import unittest
+import tempfile
 
-from bikers import bikers
+class BikersTestCase(unittest.TestCase):
 
-from bikers import getStationsAPI
-
-class BikersTestCase(object):
 
     def setUp(self):
-        getStationsAPI.initStations()
         pass
 
-    def test_index(self):
+
+    def tearDown(self):
         pass
+
+
+    def testName(self):
+        pass
+
+    def test_occupancy(self):
+        pass
+        
+    def test_bucket_occupancy(self):
+        pass
+        
+
+
+if __name__ == "__main__":
+#     import sys;sys.argv = ['', 'Test.testName']
+    unittest.main()
