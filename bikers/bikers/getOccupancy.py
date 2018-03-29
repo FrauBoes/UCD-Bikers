@@ -14,7 +14,7 @@ password="bikerz123"
 def get_station_occupancy(weekday,number):
     conn = pymysql.connect(host, user=user, port=port, passwd=password,db=dbname)
     cursor = conn.cursor()
-    sql = """SELECT TIME, NUMBER_OF_BIKES, NUMBER_OF_STANDS FROM BIKEDATA WHERE DAYOFWEEK(FROM_UNIXTIME(TIME/1000)) = {} AND STATION_NUMBER = {} ORDER BY TIME ASC LIMIT 100""".format(weekday,number)
+    sql = """SELECT TIME, NUMBER_OF_BIKES, NUMBER_OF_STANDS FROM BIKEDATA WHERE DAYOFWEEK(FROM_UNIXTIME(TIME/1000)) = {} AND STATION_NUMBER = {} ORDER BY TIME ASC""".format(weekday,number)
     cursor.execute(sql)
     data=cursor.fetchall()
     cursor.close()
@@ -22,12 +22,41 @@ def get_station_occupancy(weekday,number):
     return tuple(data)
 
 
+# returns occupancy data as array of arrays [time, degree of availability]
+def convert_data(data):
+    occupancy_array = [['Time of the day', 'Degree of availability']]
+    d = {}
+    
+    for entry in data:
+        hour, minute = get_hour(entry[0]), get_minute(entry[0])
+        time = round(hour + minute*0.1,1)  # time in format hh.m (6 bins)
+        avail = entry[1]/entry[2]  # number of bikes / number of stands
+        
+        if time in d:
+            d[time] = (d[time] + avail) / 2
+        else:
+            d[time] = avail
+    
+    for pair in d:
+        inner_array = []
+        inner_array.append(pair)
+        inner_array.append(round(d[pair],2))
+        occupancy_array.append(inner_array)
+    
+    return occupancy_array
+
+
 # returns a tuple with hour (0-23) and minute frame (0-5)
-def get_timeframe(timesstamp):
+def get_hour(timesstamp):
     hour = int(datetime.fromtimestamp(timesstamp / 1000).strftime('%H'))
-    minute = int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) // 10  
-    return hour, minute
+    return hour
 
 
+# returns a tuple with hour (0-23) and minute frame (0-5)
+def get_minute(timesstamp):
+    minute = round((int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) // 10),1)
+    return minute
+
+# 
 # if __name__=="__main__":
-#     print(get_station_occupancy(1,2))
+#     print(convert_data(get_station_occupancy(5, 10)))

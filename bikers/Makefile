@@ -13,6 +13,5 @@ run: venv
 test: venv
  	BIKERS_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
 
-
 sdist: venv test
 	venv/bin/python setup.py sdist

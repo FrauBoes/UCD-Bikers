@@ -132,7 +132,7 @@ function initMap(){
  	xhttp.onreadystatechange = function(){
  		if (this.readyState == 4 && this.status == 200){
  			console.log(this.responseText);
- 			document.getElementById("traffic-bar").innerHTML=this.responseText;
+ 			document.getElementById("occupancy-bar").innerHTML=this.responseText;
  			}
  		};
  	xhttp.open("GET","getdetail?num="+number,true);
