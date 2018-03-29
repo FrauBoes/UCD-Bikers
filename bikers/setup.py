@@ -8,10 +8,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'flask',
-<<<<<<< HEAD
-        'pymysql'],
-=======
-        'pymysql','pytest','geopy'],
->>>>>>> refs/remotes/origin/master
+        'flask','pymysql','pytest','geopy'],
 )

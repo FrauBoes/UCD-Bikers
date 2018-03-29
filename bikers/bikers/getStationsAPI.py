@@ -4,7 +4,7 @@ import json
 from . import mapStation
 #parse the url and get bikes info
 
-def initStation():
+def initStations():
     #parse the URL and get bikes info
     url="https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=51f45929f155df8d4fdd5344aa62a33c9977b803"
     with urllib.request.urlopen(url) as req:
@@ -36,11 +36,11 @@ def initStation():
                 category.append(3)
     return locations,number,bikes_stands,available_bikes,category
 
-def topStation(stations):
+def topStations(stations):
     #  find the top station which has the most bikes.
     pass
 
  
 
 if __name__=="__main__":
-    print(initStation())
+    print(initStations())
