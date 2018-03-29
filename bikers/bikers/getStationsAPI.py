@@ -50,8 +50,6 @@ def initStationInstance():
     # declare class instance list
     stations=[]
     
-    station = mapStation.[  111  ]
-    
     
     
 
