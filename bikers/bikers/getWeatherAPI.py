@@ -8,3 +8,6 @@ def weatherbroadcast():
     data = json.loads(result)
     res=data['query']['results']['channel']['item']['description'].replace("<![CDATA[","").replace("]]>","").replace("\n","")
     return res
+
+def getWeather():
+    

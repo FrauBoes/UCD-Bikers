@@ -91,7 +91,7 @@ function resetVals() {
 //            else {slot = rtime + "AM";}
 //            rtime+=3;
                 
-            disp1 += "<div class='icon'><img class='img' src='icons/" + weather + ".png'>"+temp+"&#8451</div>";
+            disp1 += "<div class='icon'><img class='img' src='../images/icons/" + weather + ".png'>"+temp+"&#8451</div>";
             disp2 += "<div class='time'>"+slot+"</div>";
 
             temp = parseInt(obj.list[j].main.temp -273.15);
