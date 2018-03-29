@@ -18,6 +18,7 @@ def get_station_occupancy(weekday,number):
     cursor.execute(sql)
     data=cursor.fetchall()
     cursor.close()
+    #print(data)
     return tuple(data)
 
 
@@ -29,4 +30,4 @@ def get_timeframe(timesstamp):
 
 
 # if __name__=="__main__":
-#     print(get_timeframe(1522274403000))
+#     print(get_station_occupancy(1,2))
