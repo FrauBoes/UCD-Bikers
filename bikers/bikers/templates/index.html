@@ -46,14 +46,11 @@
             <p>{{ weather | safe }}</p>
     </div>
   
-<<<<<<< HEAD
+
     <div id="occupancy-bar">
     	{% include 'occupancy.html' %}
-=======
-    <div id= "traffic-bar">
-    {% include "occupancy.html" %}
->>>>>>> map
     </div>
+    
 
     <div id="main-block">
         <div class="wrapper">
@@ -120,14 +117,9 @@
                 </div>
         </div>
     </footer>
-<<<<<<< HEAD
-
    {% include 'map.js' %}
 
-=======
     /*<script  src="{{ url_for('static', filename='JS/map.js') }}"></script>>*/
-    {% include "map.js" %}
->>>>>>> map
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&callback=initMap">
     </script>
 </body>

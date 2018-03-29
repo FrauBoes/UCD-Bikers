@@ -9,26 +9,22 @@ function initMap(){
 	
 	var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
-<<<<<<< HEAD
 		center:cord});
 		
 	var marker = new google.maps.Marker({
 			position: cord,
-=======
 		center:{lat:53.3439118,lng:-6.2658777}
 	});
 	
 	var marker = new google.maps.Marker({
 			position: {lat:53.3439118,lng:-6.2658777},
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
 			customInfo: "2",
 			icon:{
 			url: "{{ url_for('static', filename='images/self.png') }}",
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map
 		});
-<<<<<<< HEAD
-	
+
 	function getlocation(){
 		console.log("getLocation")
 		if(navigator.geolocation){
@@ -47,17 +43,15 @@ function initMap(){
 	}
 	
 
-	
-=======
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
+
 	// get the data from the flask
 	// it's not the ideal way to get data, just a test, will prove at the next level
 	positions = {{ locations | tojson | safe }};
 	number = {{ number }};
-	bike_stands = {{ bike_stands }}
-	available_bikes = {{ available_bikes }}
-	category = {{ category }}
-<<<<<<< HEAD
+	bike_stands = {{ bike_stands }};
+	available_bikes = {{ available_bikes }};
+	category = {{ category }};
+
 	
 	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
 	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
@@ -78,7 +72,6 @@ function initMap(){
 		})
 	});
 	
-=======
 	
 	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
 	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
@@ -99,8 +92,7 @@ function initMap(){
 		})
 	});
 	
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
-	//var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
+//var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
   /*var circles = positions.map(function(location,i){
   	return new google.maps.Circle({
             strokeColor: changeColor(available_bikes[i],bike_stands[i]),

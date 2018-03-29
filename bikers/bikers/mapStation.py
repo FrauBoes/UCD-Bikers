@@ -1,6 +1,6 @@
 #This module works for calculateing the top station depend on the user geolocation and station.
- 
- import geopy.geocoders import vincenty
+
+from geopy.distance import vincenty
  
 
      
@@ -10,15 +10,15 @@ class mapStation:
     """A class representing a Station"""
     
     
-     def __init__(self, lat, lon, center, number,avabikes,stands,status):
-         self.latitude = lat
-         self.longitude = lon
-         self.number = number
-         self.available_bikes=avabikes
-         self.bike_stands = stands
-         self.status = status
-         countDistance(center)
-         setCategory()
+    def __init__(self, lat, lon, center, number,avabikes,stands,status):
+        self.latitude = lat
+        self.longitude = lon
+        self.number = number
+        self.available_bikes=avabikes
+        self.bike_stands = stands
+        self.status = status
+        self.countDistance(center)
+        self.setCategory()
          
     def countDistance(self, center = (53.3439118,-6.2658777)):
         station_cord = (self.latitude, self.longitude)
@@ -26,7 +26,7 @@ class mapStation:
         
     def setCategory(self):
         ava = self.available_bikes / self.bike_stands
-        if(self.status = "CLOSED"):
+        if(self.status == "CLOSED"):
             self.category = 4
         else:
             if(ava==0):
