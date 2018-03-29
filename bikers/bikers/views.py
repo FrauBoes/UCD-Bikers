@@ -17,9 +17,11 @@ def index():
     
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data)
 
+
 @app.route('/getdetail')
 def occupancy_graph():
     number = request.args.get('num')
     weekday = datetime.datetime.today().weekday() + 1
     data = getOccupancy.get_station_occupancy(weekday, number)
     return render_template('occupancy.html', weekday=weekday, data=data)
+

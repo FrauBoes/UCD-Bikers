@@ -1,55 +1,20 @@
 
-<script>
 // script to draw circle on the screen
 function initMap(){
-	// get the user's geolocation
-	var cord;
-	
-	cord = {lat:53.3439118,lng:-6.2658777};
-	
+	//initialize the google map and set the center
 	var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
-<<<<<<< HEAD
-		center:cord});
-		
-	var marker = new google.maps.Marker({
-			position: cord,
-=======
 		center:{lat:53.3439118,lng:-6.2658777}
 	});
 	
 	var marker = new google.maps.Marker({
 			position: {lat:53.3439118,lng:-6.2658777},
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
 			customInfo: "2",
 			icon:{
-			url: "{{ url_for('static', filename='images/self.png') }}",
+			url: "{{ url_for('static', filename='images/bike_stand.png') }}",
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map
 		});
-<<<<<<< HEAD
-	
-	function getlocation(){
-		console.log("getLocation")
-		if(navigator.geolocation){
-			navigator.geolocation.getCurrentPosition(setMapCenter);
-		}
-	}
-	
-	getlocation();
-	
-	//initialize the google map and set the center
-	function setMapCenter(position){
-		console.log(position)
-		map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
-		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
-		marker.setPosition(cord);
-	}
-	
-
-	
-=======
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
 	// get the data from the flask
 	// it's not the ideal way to get data, just a test, will prove at the next level
 	positions = {{ locations | tojson | safe }};
@@ -57,7 +22,6 @@ function initMap(){
 	bike_stands = {{ bike_stands }}
 	available_bikes = {{ available_bikes }}
 	category = {{ category }}
-<<<<<<< HEAD
 	
 	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
 	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
@@ -78,28 +42,6 @@ function initMap(){
 		})
 	});
 	
-=======
-	
-	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
-	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
-	"{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"]
-	var markers = positions.map(function(location, i){
-	
-		var locationInfoWindow = new google.maps.InfoWindow({
-			content:infoWindowContent(number[i])
-		});
-		return new google.maps.Marker({
-			position: positions[i],
-			customInfo: number[i].toString(),
-			icon:{
-			url: imagepath[category[i]],
-			scaledSize: new google.maps.Size(64, 64)},
-			map:map,
-			infowindow:locationInfoWindow
-		})
-	});
-	
->>>>>>> b08a60279e893b659cd04022f87eada78a424d1c
 	//var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
   /*var circles = positions.map(function(location,i){
   	return new google.maps.Circle({
@@ -147,7 +89,6 @@ function initMap(){
  	xhttp.send();
  }
  
- 
  function generateContent(respon){
  	//return "<div class='info'><h1>"+respon+"</h1></div>"
  }
@@ -170,5 +111,3 @@ function hideAllInfoWindow(markers,map){
 		marker.infowindow.close(map,marker);
 	});
 }
-
-</script>
