@@ -40,23 +40,7 @@ def topStation(stations):
     #  find the top station which has the most bikes.
     pass
 
-
-def initStationInstance():
-        #parse the URL and get bikes info
-    url="https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=51f45929f155df8d4fdd5344aa62a33c9977b803"
-    with urllib.request.urlopen(url) as req:
-        bikesInfo = json.loads(req.read().decode("utf-8"))
-        
-    # declare class instance list
-    stations=[]
-    
-    
-    
-
- 
- 
- 
  
 
 if __name__=="__main__":
-    print(initStations())
+    print(initStation())
