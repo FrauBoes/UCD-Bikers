@@ -127,7 +127,7 @@ header {
 
 /* weather-bar styles */ 
 #weather-bar {
-    height: 80px;
+    height: 100px;
     padding-top: 1px;
     background: #e8eced;
 }
@@ -141,6 +141,11 @@ header {
     width: 70%;
     margin: auto;
     width:940px;
+}
+
+.weathertitle {
+	height: 20px;
+	width: 100%;
 }
 
 .upWrap {
@@ -171,16 +176,22 @@ header {
     
 }
 
+.weatherText {
+	
+}
+
 .temp {
-	vertical-align:top;
+	vertical-align: middle;
+	/*padding: 15px;*/
+	/*margin-top : 50px;*/
+	/*padding-top: 50px;*/
 }
 
 .img {
     height: 50px;
     width: 50px;
-    margin-left: 33px;
-    /*margin-right: auto;*/
-    /*display: block;*/
+    margin-left: 38px;
+
 }
 
 /* traffic-bar styles */ 
