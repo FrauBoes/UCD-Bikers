@@ -2,10 +2,11 @@
 <html lang="en">
     
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <script src="../static/js/weatherbar.js"></script>
     
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
@@ -42,13 +43,17 @@
     
     
     <div id="weather-bar">
+
             <h2>Weather bar</h2>
-            <p>{{ weather | safe }}</p>
+         <!--     <p>{{ weather | safe }}</p> -->
+
+        {% include "weatherbar.html" %}
+
     </div>
   
 
     <div id="occupancy-bar">
-    	{% include 'occupancy.html' %}
+    	{% include "occupancy.html" %}
     </div>
     
 

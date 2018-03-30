@@ -1,0 +1,45 @@
+.Wbar {
+    background-color: lightgray;    
+    height:70px;
+    width: 70%;
+    margin: auto;
+}
+
+.upWrap {
+    height:80%;
+    width: 100%;
+}
+
+.lowWrap {
+    height:20%;
+    width: 100%;
+}
+
+.time {
+    float: left;
+    bottom: 0px;
+    height:100%;
+    width: 16.5%;
+/*    border: solid 1px black;*/
+    font-size: 12px;
+    text-align: center;
+}
+
+.icon {
+    float:left;
+    width:16.66%;
+        text-align: center;
+
+    
+}
+
+.img {
+    height: 40px;
+    width: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.temp {
+}
