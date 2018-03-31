@@ -135,15 +135,73 @@ header {
     margin: 20px 0 10px 0;
 }
 
+.Wbar {
+    height:70px;
+    width: 70%;
+    margin: auto;
+    width:940px;
+}
+
+.weathertitle {
+	height: 20px;
+	width: 100%;
+}
+
+.upWrap {
+    height:80%;
+    width: 100%;
+}
+
+.lowWrap {
+    height:20%;
+    width: 100%;
+}
+
+.time {
+    float: left;
+    bottom: 0px;
+    height:100%;
+    width: 12.4%;
+/*    border: solid 1px black;*/
+    font-size: 15px;
+    text-align: center;
+}
+
+.icon {
+    float:left;
+    width:12.5%;
+    vertical-align: top;
+
+    
+}
+
+.weatherText {
+	
+}
+
+.temp {
+	vertical-align: middle;
+	/*padding: 15px;*/
+	/*margin-top : 50px;*/
+	/*padding-top: 50px;*/
+}
+
+.img {
+    height: 50px;
+    width: 50px;
+    margin-left: 38px;
+
+}
+
 /* traffic-bar styles */ 
-#traffic-bar {
+#occupancy-bar {
     height: 100px;
     padding-top: 1px;
     background: #e8ece0;
     margin: 5% 0;
 }
 
-#traffic-bar h2 {
+#occupancy-bar h2 {
     margin: 20px 0 10px 0;
 }
 

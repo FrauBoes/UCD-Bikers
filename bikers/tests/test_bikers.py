@@ -1,4 +1,6 @@
 import os
+import sys
+sys.path.append('.')
 from bikers import bikers  
 import unittest
 import tempfile
@@ -18,7 +20,7 @@ class BikersTestCase(unittest.TestCase):
         pass
 
     def test_occupancy(self):
-        pass
+
         
     def test_bucket_occupancy(self):
         pass
@@ -26,5 +28,5 @@ class BikersTestCase(unittest.TestCase):
 
 
 if __name__ == "__main__":
-#     import sys;sys.argv = ['', 'Test.testName']
+    import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
