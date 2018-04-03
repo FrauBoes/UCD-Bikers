@@ -5,23 +5,24 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable( {{ data | safe }} );
+function drawChart() {
+  var data = google.visualization.arrayToDataTable( {{ data | safe }} );
 
-    var options = {
-      title: 'Occupancy bar ',
-      curveType: 'function',
-      legend: { position: 'bottom' }
-    };
+  var options = {
+    title: 'Occupancy bar ',
+    curveType: 'function',
+    legend: { position: 'bottom' }
+  };
 
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+  var chart = new google.visualization.LineChart(document.getElementById('occupancy-bar'));
 
-    chart.draw(data, options);
-  }
-  
+  chart.draw(data, options);
+}
+
 </script>
 
-<div id="curve_chart" style="height: 100%;"></div>
+<!-- 
+<div id="curve_chart" style="height: 100%;"></div> -->

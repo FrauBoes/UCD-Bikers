@@ -19,9 +19,6 @@ def index():
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category)
 
     
-    
-
-
 @app.route('/getdetail')
 def occupancy_graph():
     number = request.args.get('num')
