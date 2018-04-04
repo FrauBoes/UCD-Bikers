@@ -21,8 +21,9 @@ JO = response.json()
 for i in range(len(JO)):
     weather = JO["list"][0]["weather"][0]["description"]
     temperature = JO["list"][0]["main"]["temp"]
+    time = JO["list"][0]["dt_txt"]
 
-    sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER) VALUES(%s,%s)"""
+    sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER, TIME) VALUES(%s,%s,%s)"""
 
     cursor.execute(sql,(temperature,weather))
 
