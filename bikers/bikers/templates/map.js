@@ -90,6 +90,7 @@ function initMap(){
 			map:map,
 			infowindow:locationInfoWindow
 		})
+	
 	});
 	
 //var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
@@ -118,7 +119,6 @@ function initMap(){
   		element.infowindow.setPosition(element.position);
   		element.infowindow.open(map, element);
   		console.log(element.position.toString());
-  		
   		});
   });
   
@@ -132,8 +132,14 @@ function initMap(){
  	xhttp.onreadystatechange = function(){
  		if (this.readyState == 4 && this.status == 200){
  			console.log(this.responseText);
- 			document.getElementById("occupancy-bar").innerHTML=this.responseText;
- 			console.log(this.responseText);
+ 			//document.getElementById("occupancy-bar").innerHTML='';
+ 			//h1 = document.createElement("div");
+ 			//h1.innerHTML=this.responseText;
+ 			//document.getElementById("occupancy-bar").appendChild(h1);
+ 			var jsonText = this.responseText;
+ 			var array = JSON.parse(jsonText);
+ 			var data = google.visualization.arrayToDataTable(array);
+ 			chart.draw(data, options);
  			}
  		};
  	xhttp.open("GET","getdetail?num="+number,true);

@@ -10,11 +10,7 @@ run: venv
 	FLASK_APP=bikers BIKERS_SETTINGS=../settings.cfg venv/bin/python -m flask run  # Sometime, application can not find the flask so use python to run flask
 	
 test: venv
-<<<<<<< HEAD
 	BIKERS_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
-=======
- 	BIKERS_SETTINGS=../settings.cfg venv/bin/python -m unittest discover -s tests
->>>>>>> 02a06d05fe4cdd119f3ac00ff4ee8fe84a6499e3
 
 sdist: venv test
 	venv/bin/python setup.py sdist
