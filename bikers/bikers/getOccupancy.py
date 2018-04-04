@@ -4,10 +4,10 @@ from builtins import list
 from datetime import datetime
 from collections import OrderedDict
 
-host ="bikerz.cji0jregr8by.us-west-2.rds.amazonaws.com"
+host ="bikedata.c33719womxye.us-east-2.rds.amazonaws.com"
 port = 3306
 dbname="BikeData"
-user = "bikerz"
+user = "aws137482dd"
 password="bikerz123"
     
     
@@ -63,5 +63,5 @@ def get_minute(timesstamp):
     return minute
 
  
-# if __name__=="__main__":
-#     print(convert_data(get_station_occupancy(4, 10)))
+if __name__=="__main__":
+    print(convert_data(get_station_occupancy(4, 10)))
