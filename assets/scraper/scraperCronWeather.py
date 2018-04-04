@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50d995bc950e6e2551bb27f090b249fb3513ff52
 #!/usr/bin/python
 
 import requests
