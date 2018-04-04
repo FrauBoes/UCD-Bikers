@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import requests
 import time
 import json
@@ -18,15 +20,14 @@ response = requests.get("http://api.openweathermap.org/data/2.5/forecast?id=2964
 
 JO = response.json()
 
-for i in range(len(JO)):
-    weather = JO["list"][0]["weather"][0]["description"]
-    temperature = JO["list"][0]["main"]["temp"]
-    time = JO["list"][0]["dt_txt"]
+weather = JO["list"][0]["weather"][0]["description"]
+temperature = JO["list"][0]["main"]["temp"]
+time = JO["list"][0]["dt_txt"]
 
-    sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER, TIME) VALUES(%s,%s,%s)"""
+sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER, TIME) VALUES(%s,%s,%s)"""
 
-    cursor.execute(sql,(temperature,weather, time))
+cursor.execute(sql,(temperature,weather, time))
 
-    conn.commit()
+conn.commit()
     
 conn.close()
