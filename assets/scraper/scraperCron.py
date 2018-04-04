@@ -43,7 +43,7 @@ for i in range(len(JO)):
     Time = JO[i]['last_update']
     bank = JO[i]['banking']
 
-    sql = """INSERT INTO BIKEDATA (STATION_NAME ,STATION_ADDRESS, STATION_NUMBER, STATUS, TIME, NUMBER_OF_STANDS,NUMBER_OF_BIKES, NUMBER_OF_SPACES, BANKING, TEMPERATURE, WEATHER) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+    sql = """INSERT INTO BIKEWEATHERDATA (STATION_NAME ,STATION_ADDRESS, STATION_NUMBER, STATUS, TIME, NUMBER_OF_STANDS,NUMBER_OF_BIKES, NUMBER_OF_SPACES, BANKING, TEMPERATURE, WEATHER) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
 
     cursor.execute(sql,(station,statAddress,stationNum,status,Time,numStands,bikes,spaces,bank,temperature,weather))
 
