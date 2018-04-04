@@ -17,7 +17,7 @@ temperature = data["list"][0]["main"]["temp"]
 
 host ="bikedata.c33719womxye.us-east-2.rds.amazonaws.com"
 port = 3306
-dbname="bikedata"
+dbname="BikeData"
 user = "aws137482dd"
 password="bikerz123"
 
