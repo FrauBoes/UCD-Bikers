@@ -25,7 +25,7 @@ for i in range(len(JO)):
 
     sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER, TIME) VALUES(%s,%s,%s)"""
 
-    cursor.execute(sql,(temperature,weather))
+    cursor.execute(sql,(temperature,weather, time))
 
     conn.commit()
     
