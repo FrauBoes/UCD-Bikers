@@ -14,8 +14,13 @@ def index():
     weather = getWeatherAPI.getWeather()
     
     # weekday and data for occupancy.html
+<<<<<<< HEAD
     weekday = (datetime.datetime.today().weekday() + 2)%7
     data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 8)) # default station, to be changed later
+=======
+    weekday = datetime.datetime.today().weekday() + 2
+    data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 37)) # default station, to be changed later
+>>>>>>> c2433be1c5cb0d20c01781be6352996d1fac0d45
     
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category)
 

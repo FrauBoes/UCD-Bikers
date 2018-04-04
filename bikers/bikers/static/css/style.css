@@ -180,7 +180,8 @@ header {
 .temp {
 	vertical-align: middle;
 	/*padding: 15px;*/
-	/*margin-top : 50px;*/
+	/*margin-top : 0px,0px,0px,0px;
+	padding: 0px;*?
 	/*padding-top: 50px;*/
 }
 
