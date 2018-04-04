@@ -15,9 +15,9 @@ with urllib.request.urlopen(url) as url:
 weather = data["list"][0]["weather"][0]["description"]
 temperature = data["list"][0]["main"]["temp"]
 
-host ="Bikerz.cji0jregr8by.us-west-2.rds.amazonaws.com"
+host ="bikedata.c33719womxye.us-east-2.rds.amazonaws.com"
 port = 3306
-dbname="BikeData"
+dbname="bikedata"
 user = "aws137482dd"
 password="bikerz123"
 
