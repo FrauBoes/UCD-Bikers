@@ -4,17 +4,19 @@ from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
+from flask.json import jsonify
 
 @app.route('/')
 def index():
     app.logger.warning('sample message')
 
     locations, number,bike_stands,available_bikes,category= getStationsAPI.initStations()
-    weather = getWeatherAPI.getWeather();
+    weather = getWeatherAPI.getWeather()
     
     # weekday and data for occupancy.html
-    weekday = datetime.datetime.today().weekday() + 2
-    data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 37)) # default station, to be changed later
+    weekday = (datetime.datetime.today().weekday() + 2)%7
+    data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 8)) # default station, to be changed later
+
     
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category)
 
@@ -22,7 +24,8 @@ def index():
 @app.route('/getdetail')
 def occupancy_graph():
     number = request.args.get('num')
-    weekday = datetime.datetime.today().weekday() + 2
+    weekday = (datetime.datetime.today().weekday() + 2)%7
     data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, number))
-    return render_template('occupancy.html', weekday=weekday, data=data)
+    return jsonify(data)
+
 

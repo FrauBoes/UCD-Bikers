@@ -8,16 +8,19 @@
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
-  var data = google.visualization.arrayToDataTable( {{ data | safe }} );
+var chart;
+var options;
 
-  var options = {
+function drawChart() {
+	var data = google.visualization.arrayToDataTable({{ data | safe }});
+
+  options = {
     title: 'Occupancy bar ',
     curveType: 'function',
     legend: { position: 'bottom' }
   };
 
-  var chart = new google.visualization.LineChart(document.getElementById('occupancy-bar'));
+  chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
   chart.draw(data, options);
 }
