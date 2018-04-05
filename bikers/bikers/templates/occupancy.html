@@ -4,29 +4,26 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
- 
 
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  
-  var chart;
-  var options;
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
 
-  function drawChart() {
-  	var data = google.visualization.arrayToDataTable({{ data | safe }});
+var chart;
+var options;
 
-    options = {
-      title: 'Occupancy bar ',
-      curveType: 'function',
-      legend: { position: 'bottom' }
-    };
+function drawChart() {
+	var data = google.visualization.arrayToDataTable({{ data | safe }});
 
-    chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+  options = {
+    title: 'Occupancy bar ',
+    curveType: 'function',
+    legend: { position: 'bottom' }
+  };
 
-    chart.draw(data, options);
-  }
-  
+  chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
+  chart.draw(data, options);
+}
 
 </script>
 
