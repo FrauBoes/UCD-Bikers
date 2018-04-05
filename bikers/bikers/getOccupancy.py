@@ -63,5 +63,5 @@ def get_minute(timesstamp):
     return minute
 
  
-if __name__=="__main__":
-    print(convert_data(get_station_occupancy(4, 10)))
+# if __name__=="__main__":
+#     print(convert_data(get_station_occupancy(4, 10)))
