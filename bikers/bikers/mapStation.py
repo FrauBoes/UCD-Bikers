@@ -2,16 +2,16 @@
 import geopy
 from geopy.distance import vincenty
 import json
-
+import os
 
 class mapper:
     """Creates a class with all of the station locations as tuples as a list"""
 
     stationCoords = []
-
+    
     #creates a list of tuples of (station number, latitude, longitude)
-    def __init__(self,JSON):
-        with open('stations.json') as data_file:
+    def __init__(self):
+        with open(os.path.join(os.path.dirname(__file__),'stations.json'), 'r')as data_file:
             data = json.loads(data_file.read())
 
         for x in data:
@@ -46,3 +46,4 @@ class mapper:
                     station3 = x[0]
         #Returns tuple with the 3 closest stations numbers
         return (station1,station2,station3)
+    

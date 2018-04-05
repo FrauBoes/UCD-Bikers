@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,8 +57,52 @@
     <div id="main-block">
         <div class="wrapper">
             <div id="station-list">
+            	<div class = "station-list-wrapper">
+            		<div class= "station-streetview" id= "station-0"></div>
+            		<div class= "station-worddetails">
+            			<h3>Top Station</h3>
+                        <p>Address and station number</p>
+                        <ul>
+                            <li>Available Bikes</li>
+                            <li>Free Stands</li>
+                            <li>Capacity</li>
+                            <li>Credit card</li>
+                            <p></p>
+                        </ul>
+            		</div>
+            	</div>
+            	<div class = "station-list-wrapper">
+            		<div class= "station-streetview" id= "station-1"></div>
+            		<div class= "station-worddetails">
+            			<h3>Top Station</h3>
+                        <p>Address and station number</p>
+                        <ul>
+                            <li>Available Bikes</li>
+                            <li>Free Stands</li>
+                            <li>Capacity</li>
+                            <li>Credit card</li>
+                            <p></p>
+                        </ul>
+            		</div>
+            	</div>
+            	<div class = "station-list-wrapper">
+            		<div class= "station-streetview" id= "station-2"></div>
+            		<div class= "station-worddetails">
+            			<h3>Top Station</h3>
+                        <p>Address and station number</p>
+                        <ul>
+                            <li>Available Bikes</li>
+                            <li>Free Stands</li>
+                            <li>Capacity</li>
+                            <li>Credit card</li>
+                            <p></p>
+                        </ul>
+            		</div>
+            	</div>
+
+      	<!--
                 <ul>
-                    <li class="station-top">
+                    <li id="station-0">
                         <h3>Top Station</h3>
                         <p>Address and station number</p>
                         <ul>
@@ -69,7 +114,7 @@
                         </ul>
                     </li>
 
-                    <li class="station-other">
+                    <li id="station-1">
                         <h3>Other Station</h3>
                         <p>Address and station number</p>
                         <ul>
@@ -81,7 +126,7 @@
                         </ul>
                     </li>
 
-                    <li class="station-other">
+                    <li id="station-2">
                         <h3>Other Station</h3>
                         <p>Address and station number</p>     
                         <ul>
@@ -95,6 +140,7 @@
 
                     <div class="clear"></div>
                 </ul>
+-->
             </div>
             
             <div id="map"></div>

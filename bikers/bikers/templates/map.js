@@ -1,5 +1,5 @@
 
-<script>
+<script> 
 // script to draw circle on the screen
 function initMap(){
 	// get the user's geolocation
@@ -40,17 +40,41 @@ function initMap(){
 		map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
 		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
 		marker.setPosition(cord);
+		setCenterAndList(position.coords.latitude, position.coords.longitude);
+		
 	}
 	
+	function setCenterAndList(lat,lng){
+	console.log(location)
+ 	var xhttp = new XMLHttpRequest();
+ 	xhttp.onreadystatechange = function(){
+ 		if (this.readyState == 4 && this.status == 200){
+ 			console.log(this.reponseText);
+ 			var jsonText = this.responseText;
+ 			var array = JSON.parse(jsonText);
+ 			console.log(array)
+ 			document.getElementsByClassName("station-worddetails")[0].innerHTML = array[0];
+ 			document.getElementsByClassName("station-worddetails")[1].innerHTML = array[1];
+ 			document.getElementsByClassName("station-worddetails")[2].innerHTML = array[2];
+ 			//document.getElementById("station-1").innerHTML = array[1];
+ 			//document.getElementById("station-3").innerHTML = array[2];
+ 			var panormaslocations = [positions[array[0]],positions[array[1]],positions[array[2]]];
+ 			initPano(panormaslocations);
+ 			}
+ 		};
+ 	xhttp.open("GET","userlocation?lat="+lat+"&lon="+lng,true);
+ 	xhttp.send();
+ }
+ 
 
 
 	// get the data from the flask
 	// it's not the ideal way to get data, just a test, will prove at the next level
-	positions = {{ locations | tojson | safe }};
-	number = {{ number }};
-	bike_stands = {{ bike_stands }};
-	available_bikes = {{ available_bikes }};
-	category = {{ category }};
+	var positions = {{ locations | tojson | safe }};
+	var number = {{ number }};
+	var bike_stands = {{ bike_stands }};
+	var available_bikes = {{ available_bikes }};
+	var category = {{ category }};
 
 	
 	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
@@ -71,27 +95,30 @@ function initMap(){
 			infowindow:locationInfoWindow
 		})
 	});
+	// for the street view part
+	//panormaslocations= positions.slice(0, 3);
+	function initPano(panormaslocations){
+	var panoramas = panormaslocations.map(function(location, i){
+		var id = "station-"+i.toString();
+		console.log(id)
+		var panorama = new google.maps.StreetViewPanorama(
+			document.getElementById(id), {
+				position: location,
+				pov:{
+					heading: 34,
+					pitch: 10
+				}
+			}
+		);
+		map.setStreetView(panorama);
+		return panorama
+	});};
+	
+	//initPano(panormaslocations);
 	
 	
-	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
-	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
-	"{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"]
-	var markers = positions.map(function(location, i){
 	
-		var locationInfoWindow = new google.maps.InfoWindow({
-			content:infoWindowContent(number[i])
-		});
-		return new google.maps.Marker({
-			position: positions[i],
-			customInfo: number[i].toString(),
-			icon:{
-			url: imagepath[category[i]],
-			scaledSize: new google.maps.Size(64, 64)},
-			map:map,
-			infowindow:locationInfoWindow
-		})
 	
-	});
 	
 //var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
   /*var circles = positions.map(function(location,i){
@@ -119,6 +146,8 @@ function initMap(){
   		element.infowindow.setPosition(element.position);
   		element.infowindow.open(map, element);
   		console.log(element.position.toString());
+  		console.log(element.position["lat"]);
+  		setCenterAndList(element.position['lat'],element.position["lng"]);
   		});
   });
   

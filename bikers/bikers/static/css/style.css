@@ -269,3 +269,25 @@ footer {
     display: inline;
     padding: 3%;
 }
+
+
+.station-list-wrapper{
+	position:relative;	
+	}
+	
+.station-streetview, .station-worddetails{
+	width:300px;
+	height:200px;
+	top: 0;
+	left:0;
+}
+
+.station-worddetails{
+	position: absolute;
+	top: 0;
+	z-index: 10;
+	background-color:black;
+	color:red;
+	font-size: 24px;
+	opacity: 0.4;
+	}

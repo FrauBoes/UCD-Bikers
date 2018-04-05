@@ -4,6 +4,7 @@ from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
+from . import mapStation
 from flask.json import jsonify
 
 @app.route('/')
@@ -32,3 +33,14 @@ def occupancy_graph():
     return jsonify(data)
 
 
+
+@app.route('/userlocation')
+def receive_location():
+    latitude = request.args.get('lat')
+    longitude = request.args.get('lon')
+    stationList = mapStation.mapper()
+    topStation = stationList.findClosest((latitude,longitude))
+    print(topStation)
+    return jsonify(topStation)
+    
+    
