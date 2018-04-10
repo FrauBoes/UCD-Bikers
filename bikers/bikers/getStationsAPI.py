@@ -17,8 +17,6 @@ def initStations():
 
     for s in bikesInfo:
         number.append(s['number'])
-        #name = s['name']
-        #address = s['address']
         locations.append(s['position'])
         bikes_stands.append(s['bike_stands'])
         available_bikes.append(s['available_bikes'])
@@ -35,12 +33,6 @@ def initStations():
             else:
                 category.append(3)
     return locations,number,bikes_stands,available_bikes,category
-
-def topStations(stations):
-    #  find the top station which has the most bikes.
-    pass
-
- 
 
 if __name__=="__main__":
     print(initStations())
