@@ -1,4 +1,4 @@
-#This module works for calculateing the top station depend on the user geolocation and station.
+# This module works for calculateing the top station depending on the user geolocation and station.
 import geopy
 from geopy.distance import vincenty
 import json
@@ -6,14 +6,14 @@ import json
 
 class mapper:
     """Creates a class with all of the station locations as tuples as a list"""
-
+    # Will contain coordinates of all stations
     stationCoords = []
 
-    #creates a list of tuples of (station number, latitude, longitude)
-    def __init__(self,JSON):
-        with open('stations.json') as data_file:
+    # Creates a list of tuples of (station number, latitude, longitude)
+    def __init__(self):
+        with open('../../assets/stations.json') as data_file:
             data = json.loads(data_file.read())
-
+        # Iterate through JSON file and create tuples and add to list
         for x in data:
             station = x['number']
             lat = x['latitude']
@@ -27,7 +27,7 @@ class mapper:
     #Function that takes input of user location and compares to all station locations and returns the 3 closest
 
     def findClosest(self,location):
-        #initialise distances to arbitrarily high values so the first few values will be written
+        # Initialise distances to arbitrarily high values so the first few values will be written
         first,second,third = 10000,10000,10000
 
         for x in self.stationCoords:
