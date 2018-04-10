@@ -5,25 +5,25 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
-
-var chart;
-var options;
-
-function drawChart() {
-	var data = google.visualization.arrayToDataTable({{ data | safe }});
-
-  options = {
-    title: 'Occupancy bar ',
-    curveType: 'function',
-    legend: { position: 'bottom' }
-  };
-
-  chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-  chart.draw(data, options);
-}
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	
+	var chart;
+	var options;
+	
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable({{ data | safe }});
+	
+	  	options = {
+	    title: 'Occupancy bar ',
+	    curveType: 'function',
+	    legend: { position: 'bottom' }
+		};
+	
+	chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+	
+	chart.draw(data, options);
+	}
 
 </script>
 

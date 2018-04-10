@@ -49,9 +49,11 @@
   
 
     <div id="occupancy-bar">
-    	{% include "occupancy.html" %}
-    </div>
     
+    	{% include "occupancy.html" %}
+    	
+    </div>
+  
 
     <div id="main-block">
         <div class="wrapper">
@@ -118,9 +120,9 @@
                 </div>
         </div>
     </footer>
-   {% include 'map.js' %}
+    
+   	{% include 'map.js' %}
 
-    /*<script  src="{{ url_for('static', filename='JS/map.js') }}"></script>>*/
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&callback=initMap">
     </script>
 </body>
