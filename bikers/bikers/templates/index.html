@@ -5,8 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/ccd' >
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,11 +26,12 @@
     
     <div id="search-bar">
         <div class="wrapper">
-            <form id="search-form" onsubmit=""> 
+            <form id="search-form" onsubmit="">
+
             		<a class="current-location-button" href="">
                 		<img width="16" height="16" src="{{ url_for('static', filename='images/current-location.png') }}">
             		</a>
-            		<input type="text" value="Current location...">
+            		<input id='place_search' class="controls" placeholder="Search Box" type="text"  >
             		<a class="search-button" href="">
                 		<img width="16" height="16" src="{{ url_for('static', filename='images/search-button.png') }}">
             		</a>
@@ -123,7 +123,7 @@
     
    	{% include 'map.js' %}
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">
     </script>
 </body>
     
