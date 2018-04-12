@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/ccd' >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -60,7 +62,7 @@
             <div id="station-list">
                 <ul>
                     <li class="station-top">
-                        <h3>Top Station</h3>
+                        <h3 id="'top_station">Top Station</h3>
                         <p>Address and station number</p>
                         <ul>
                             <li>Available Bikes</li>
@@ -72,7 +74,7 @@
                     </li>
 
                     <li class="station-other">
-                        <h3>Other Station</h3>
+                        <h3  id="second_station">Other Station</h3>
                         <p>Address and station number</p>
                         <ul>
                             <li>Available Bikes</li>

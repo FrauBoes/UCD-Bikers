@@ -4,6 +4,7 @@ from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
+from . import mapStation
 
 @app.route('/')
 def index():
@@ -32,5 +33,24 @@ def occupancy_graph():
     data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, number))
     
     return jsonify(data)
+
+@app.route('/getstations')
+def list_stations():
+    #Get the longitude and latitude of searched place
+    lat = float(request.args.get('lat'))
+    lng = float(request.args.get('lng'))
+
+    loc = (lat,lng)
+
+    #Need to see if every station in the list has bikes
+
+    M = mapStation.mapper()
+    nearestStats = M.findClosest(loc)
+
+    one = str(nearestStats[0])
+    two = str(nearestStats[1])
+    three = str(nearestStats[2])
+
+    return jsonify(nearestStats)
 
 

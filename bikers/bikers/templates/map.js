@@ -104,6 +104,37 @@ searchBox.addListener('places_changed', function() {
             var searchLat = place.geometry.location.lat();
             var searchLon = place.geometry.location.lng();
 
+            bikerank(searchLat,searchLon);
+
+//     function bikerank(searchLat,searchLon){
+//            var xhttp = new XMLHttpRequest();
+//            xhttp.onreadystatechange = function(){
+//                if (this.readyState == 4 && this.status == 200){
+//                    console.log(this.responseText);
+//
+//                    var stationsRanked = this.responseText
+//
+//
+//
+//                }
+//            };
+//        xhttp.open("GET","getstations?lng="+searchLon+"&lat="+searchLat,true);
+//
+//        xhttp.send();
+//}
+
+    var url = "getstations?lng="+searchLon+"&lat="+searchLat
+    $.getJSON(url, function(data)){
+
+            station1 = data[0][1]
+            station2 = data[1][1]
+            station3 = data[2][1]
+//            station4 = data[3]
+//            station4 = data[4]
+
+
+    }
+
           });
           map.fitBounds(bounds);
 // Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
