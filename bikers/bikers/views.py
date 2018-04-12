@@ -4,6 +4,8 @@ from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
+from . import getModel
+
 
 @app.route('/')
 def index():
@@ -29,8 +31,7 @@ def occupancy_graph():
     weekday = datetime.datetime.today().weekday() + 2   
     
     # Get past occupancy data based on station and weekday    
-    data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, number))
-    
-    return jsonify(data)
+    data = getOccupancy.get_station_occupancy(weekday, number)
+    return data
 
 

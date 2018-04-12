@@ -1,5 +1,6 @@
 import json
 import pymysql
+from flask import jsonify
 from builtins import list
 from datetime import datetime
 from collections import OrderedDict
@@ -19,8 +20,7 @@ def get_station_occupancy(weekday,number):
     cursor.execute(sql)
     data=cursor.fetchall()
     cursor.close()
-    #print(data)
-    return tuple(data)
+    return data
 
 
 # returns occupancy data as array of arrays [time, degree of availability]
@@ -64,4 +64,4 @@ def get_minute(timesstamp):
 
  
 # if __name__=="__main__":
-#     print(convert_data(get_station_occupancy(4, 10)))
+#     print(get_station_occupancy(4, 10))
