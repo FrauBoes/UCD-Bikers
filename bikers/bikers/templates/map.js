@@ -11,6 +11,21 @@ function initMap(){
 	var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
 		center:cord});
+
+//	##################################################################################################
+
+// Create the search box and link it to the UI element.
+        var input = document.getElementById('place_search');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+
+
 		
 	var marker = new google.maps.Marker({
 			position: cord,
@@ -34,7 +49,7 @@ function initMap(){
 	}
 	
 	getlocation();
-	
+
 	//initialize the google map and set the center
 	function setMapCenter(position){
 		console.log(position)
@@ -43,7 +58,89 @@ function initMap(){
 		marker.setPosition(cord);
 	}
 	
+searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
 
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+
+            var searchLat = place.geometry.location.lat();
+            var searchLon = place.geometry.location.lng();
+
+            bikerank(searchLat,searchLon);
+
+//     function bikerank(searchLat,searchLon){
+//            var xhttp = new XMLHttpRequest();
+//            xhttp.onreadystatechange = function(){
+//                if (this.readyState == 4 && this.status == 200){
+//                    console.log(this.responseText);
+//
+//                    var stationsRanked = this.responseText
+//
+//
+//
+//                }
+//            };
+//        xhttp.open("GET","getstations?lng="+searchLon+"&lat="+searchLat,true);
+//
+//        xhttp.send();
+//}
+
+    var url = "getstations?lng="+searchLon+"&lat="+searchLat
+    $.getJSON(url, function(data)){
+
+            station1 = data[0][1]
+            station2 = data[1][1]
+            station3 = data[2][1]
+//            station4 = data[3]
+//            station4 = data[4]
+
+
+    }
+
+          });
+          map.fitBounds(bounds);
+// Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
+
+
+        });
 	// get the data from the flask
 	// it's not the ideal way to get data, just a test, will prove at the next level
 	positions = {{ locations | tojson | safe }};
@@ -150,5 +247,6 @@ function hideAllInfoWindow(markers,map){
 		marker.infowindow.close(map,marker);
 	});
 }
+
 
 </script>
