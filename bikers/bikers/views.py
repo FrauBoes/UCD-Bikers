@@ -4,13 +4,16 @@ from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
-<<<<<<< HEAD
+
+
 from . import mapStation
 from flask.json import jsonify
-=======
+
 from . import getModel
 
->>>>>>> 57bb7c1c3163ce1108cc5f53b15323c14d0581f3
+from . import mapStation
+
+
 
 @app.route('/')
 def index():
@@ -38,6 +41,25 @@ def occupancy_graph():
     # Get past occupancy data based on station and weekday    
     data = getOccupancy.get_station_occupancy(weekday, number)
     return data
+
+@app.route('/getstations')
+def list_stations():
+    #Get the longitude and latitude of searched place
+    lat = float(request.args.get('lat'))
+    lng = float(request.args.get('lng'))
+
+    loc = (lat,lng)
+
+    #Need to see if every station in the list has bikes
+
+    M = mapStation.mapper()
+    nearestStats = M.findClosest(loc)
+
+    one = str(nearestStats[0])
+    two = str(nearestStats[1])
+    three = str(nearestStats[2])
+
+    return jsonify(nearestStats)
 
 
 

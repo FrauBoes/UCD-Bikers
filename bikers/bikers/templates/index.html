@@ -5,8 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<<<<<<< HEAD
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+=======
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/ccd' >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+>>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
 
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
@@ -29,11 +34,12 @@
     
     <div id="search-bar">
         <div class="wrapper">
-            <form id="search-form" onsubmit=""> 
+            <form id="search-form" onsubmit="">
+
             		<a class="current-location-button" href="">
                 		<img width="16" height="16" src="{{ url_for('static', filename='images/current-location.png') }}">
             		</a>
-            		<input type="text" value="Current location...">
+            		<input id='place_search' class="controls" placeholder="Search Box" type="text"  >
             		<a class="search-button" href="">
                 		<img width="16" height="16" src="{{ url_for('static', filename='images/search-button.png') }}">
             		</a>
@@ -105,8 +111,13 @@
 
       	<!--
                 <ul>
+<<<<<<< HEAD
                     <li id="station-0">
                         <h3>Top Station</h3>
+=======
+                    <li class="station-top">
+                        <h3 id="'top_station">Top Station</h3>
+>>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
                         <p>Address and station number</p>
                         <ul>
                             <li>Available Bikes</li>
@@ -117,8 +128,13 @@
                         </ul>
                     </li>
 
+<<<<<<< HEAD
                     <li id="station-1">
                         <h3>Other Station</h3>
+=======
+                    <li class="station-other">
+                        <h3  id="second_station">Other Station</h3>
+>>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
                         <p>Address and station number</p>
                         <ul>
                             <li>Available Bikes</li>
@@ -173,8 +189,12 @@
     
    	{% include 'map.js' %}
 
+<<<<<<< HEAD
 >>>>>>> 57bb7c1c3163ce1108cc5f53b15323c14d0581f3
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&callback=initMap">
+=======
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">
+>>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
     </script>
 </body>
     
