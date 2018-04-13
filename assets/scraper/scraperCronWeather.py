@@ -16,18 +16,22 @@ conn = pymysql.connect(host, user=user, port=port, passwd=password,db=dbname)
 
 cursor = conn.cursor()
 
-response = requests.get("http://api.openweathermap.org/data/2.5/forecast?id=2964574&APPID=31f19a108384bc317e2d91c5621c791e")
+response = requests.get("http://api.openweathermap.org/data/2.5/weather?units=metric&id=2964574&APPID=31f19a108384bc317e2d91c5621c791e")
 
 JO = response.json()
 
-weather = JO["list"][0]["weather"][0]["description"]
-temperature = JO["list"][0]["main"]["temp"]
-time = JO["list"][0]["dt_txt"]
+try:
+        rain = JO["rain"]["3h"]
+except KeyError:
+        rain = 0
+        
+temperature = JO["main"]["temp"]
+time = datetime.datetime.fromtimestamp(int(JO["dt"])).strftime('%d/%m/%Y %H:%M')
 
-sql = """INSERT INTO WEATHERDATA (TEMPERATURE, WEATHER, TIME) VALUES(%s,%s,%s)"""
+sql = """INSERT INTO WEATHERDATA (TEMPERATURE, RAIN, TIME) VALUES (%s,%s,%s)"""
 
-cursor.execute(sql,(temperature,weather, time))
+cursor.execute(sql,(temperature,rain,time))
 
 conn.commit()
-    
+
 conn.close()

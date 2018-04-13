@@ -1,5 +1,6 @@
 <script> 
 // script to draw circle on the screen
+
 function initMap(){
 	// user's default location
 	var cord = {lat:53.3439118,lng:-6.2658777};
@@ -118,7 +119,6 @@ function initMap(){
  	xhttp.send();
  } */
 
-
 	// get the data from the flask
 	// it's not the ideal way to get data, just a test, will prove at the next level
 	var positions = {{ locations | tojson | safe }};
@@ -171,20 +171,7 @@ function initMap(){
 	
 	
 	
-//var markerCluster = new MarkerCluster(map,markers,{imagePath: "{{ url_for('static', filename='images/bike_stand.png') }}"});
-  /*var circles = positions.map(function(location,i){
-  	return new google.maps.Circle({
-            strokeColor: changeColor(available_bikes[i],bike_stands[i]),
-            strokeOpacity: 0.8,
-            strokeWeight: 1,
-            fillColor: changeColor(available_bikes[i],bike_stands[i]),
-            fillOpacity: 0.5,
-            map: map,
-            center: positions[i],
-            radius: bike_stands[i]*4,
-            clickable: true,
-  	});
-  });*/
+
   var infoMark = false;
   markers.forEach(function(element){
   	// with query to request to the flask
@@ -203,17 +190,17 @@ function initMap(){
   		setCenterAndList(element.getPosition().lat(),element.getPosition().lng());
   		});
   });
-  
-	// Add a marker cluster tomanage the markers
-	//var markerCluster = new MarkerClusterer(map,markers,{imagepath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}); 
-	
+
 	}
 	
  function loadMore(number){
  	var xhttp = new XMLHttpRequest();
  	xhttp.onreadystatechange = function(){
  		if (this.readyState == 4 && this.status == 200){
+<<<<<<< HEAD
  			//document.getElementById("occupancy-bar").innerHTML=this.responseText;
+=======
+>>>>>>> 57bb7c1c3163ce1108cc5f53b15323c14d0581f3
  			console.log(this.responseText);
  			
  			var jsonText = this.responseText;

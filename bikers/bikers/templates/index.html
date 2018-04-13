@@ -19,9 +19,10 @@
         <div class="wrapper">
             <nav>
                 <a href="#">UCD Bikers</a>
-                <a href="#">Google Maps</a>
-                <a href="#">Open Weather</a>
-                <a href="#">Dublin Bikes</a>
+                <a href="https://www.google.ie/maps?hl=en" target="_blank">Google Maps</a>
+                <a href="https://openweathermap.org/" target="_blank">Open Weather</a>
+                <a href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a>
+                <div class="clear"></div>
             </nav>
         </div>    
     </header>
@@ -43,16 +44,18 @@
     
     
     <div id="weather-bar">
-    
-        {% include "weatherbar.html" %}
-
+    	<div class="wrapper">
+        	{% include "weatherbar.html" %}
+		</div>
     </div>
   
 
     <div id="occupancy-bar">
+    	<div class="wrapper">
     	{% include "occupancy.html" %}
+    	</div>
     </div>
-    
+  
 
     <div id="main-block">
         <div class="wrapper">
@@ -164,7 +167,13 @@
                 </div>
         </div>
     </footer>
+<<<<<<< HEAD
    {% include 'map.js' %}
+=======
+    
+   	{% include 'map.js' %}
+
+>>>>>>> 57bb7c1c3163ce1108cc5f53b15323c14d0581f3
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&callback=initMap">
     </script>
 </body>

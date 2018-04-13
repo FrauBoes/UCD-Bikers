@@ -38,5 +38,5 @@ for i in range(len(JO)):
     cursor.execute(sql,(station,statAddress,stationNum,status,time,numStands,bikes,spaces,bank))
 
     conn.commit()
-    
+
 conn.close()
