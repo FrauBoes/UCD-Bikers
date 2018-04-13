@@ -56,7 +56,7 @@ function initMap(){
 		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
 		marker.setPosition(cord);
 		setCenterAndList(position.coords.latitude, position.coords.longitude,initPano);
-	}
+	};
 	
 	// with pure JAvascript to send query
 	function setCenterAndList(lat,lng,func){
@@ -74,7 +74,7 @@ function initMap(){
 	 			func(panoramalocations);
 	 				
 		});
-	}
+	};
 	
 	
 	
@@ -88,10 +88,10 @@ searchBox.addListener('places_changed', function() {
           }
 
           // Clear out the old markers.
-          markers.forEach(function(marker) {
+          spotmarkers.forEach(function(marker) {
             marker.setMap(null);
           });
-          markers = [];
+          spotmarkers = [];
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
@@ -109,7 +109,7 @@ searchBox.addListener('places_changed', function() {
             };
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+            spotmarkers.push(new google.maps.Marker({
               map: map,
               icon: icon,
               title: place.name,
@@ -129,20 +129,17 @@ searchBox.addListener('places_changed', function() {
             bikerank(searchLat,searchLon);
 
 
-    var url = "getstations?lng="+searchLon+"&lat="+searchLat
-    $.getJSON(url, function(data)){
+    var url = "getstations?lng="+searchLon+"&lat="+searchLat;
+    $.getJSON(url, function(data){
 
             station1 = data[0][1]
             station2 = data[1][1]
             station3 = data[2][1]
 //            station4 = data[3]
 //            station4 = data[4]
-
-
-    }
-
-          });
-          map.fitBounds(bounds);
+})
+     });
+             map.fitBounds(bounds);
 // Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
 
 
@@ -194,13 +191,9 @@ searchBox.addListener('places_changed', function() {
 	});};
 	
 	//initPano(panormaslocations);
-	
-	function updatePano()
-	
-	
-	
-
+  
   var infoMark = false;
+  
   markers.forEach(function(element){
   	// with query to request to the flask
   	
@@ -219,7 +212,6 @@ searchBox.addListener('places_changed', function() {
   		});
   });
 
-	}
 	
  function loadMore(number){
  	var xhttp = new XMLHttpRequest();
@@ -266,7 +258,8 @@ function changeColor(num,totalNum){
 function hideAllInfoWindow(markers,map){
 	markers.forEach(function(marker){
 		marker.infowindow.close(map,marker);
-	});
+	})};
+	
 }
 
 
