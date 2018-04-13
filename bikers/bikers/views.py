@@ -34,9 +34,7 @@ def occupancy_graph():
 def receive_location():
     latitude = request.args.get('lat')
     longitude = request.args.get('lon')
-    stationList = mapStation.mapper()
-    topStation = stationList.findClosest((latitude,longitude))
-    print(topStation)
-    return jsonify(topStation)
+    cord = (latitude,longitude)
+    return jsonify(getStationsAPI.updateList(cord))
     
     

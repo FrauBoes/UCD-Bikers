@@ -1,31 +1,83 @@
-
 <script> 
 // script to draw circle on the screen
 function initMap(){
-	// get the user's geolocation
-	var cord;
+	// user's default location
+	var cord = {lat:53.3439118,lng:-6.2658777};
 	
-	cord = {lat:53.3439118,lng:-6.2658777};
-	
+	// init map instance
 	var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
 		center:cord});
-		
+	
+	// init user location's marker
 	var marker = new google.maps.Marker({
 			position: cord,
-		center:{lat:53.3439118,lng:-6.2658777}
-	});
-	
-	var marker = new google.maps.Marker({
-			position: {lat:53.3439118,lng:-6.2658777},
 			customInfo: "2",
 			icon:{
 			url: "{{ url_for('static', filename='images/self.png') }}",
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map
 		});
+	
+	// get user location and reset the map's center 
+		//Get user location, if not, use the default location
+	//If user's location between default location is greater than 2km, still use the default location 
+	function getLocation(){
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(setMapCenter);
+		}
+	};
+	
+	function setMapCenter(position){ 
+		//mark uers' locaiton with a marker
+		//map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
+		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
+		marker.setPosition(cord);
+		setCenterAndList(position.coords.latitude, position.coords.longitude,initPano);
+	}
+	
+	// with pure JAvascript to send query
+	function setCenterAndList(lat,lng,func){
+// 	 	var xhttp = new XMLHttpRequest();
+// 	 	xhttp.onreadystatechange = function(){
+// 	 		if (this.readyState == 4 && this.status == 200){
+// 	 			var jsonText = this.responseText;
+// 	 			var listDict = JSON.parse(jsonText);
+// 	 			console.log(listDict)
+// 	 			document.getElementsByClassName("station-worddetails")[0].innerHTML = listDict[0].toString();
+// 	 			document.getElementsByClassName("station-worddetails")[1].innerHTML = listDict[1].toString();
+// 	 			document.getElementsByClassName("station-worddetails")[2].innerHTML = listDict[2].toString();
+// 	 			//document.getElementById("station-1").innerHTML = array[1];
+// 	 			//document.getElementById("station-3").innerHTML = array[2];
+// 	 			//var lsitCord = []
+// 	 			//var values = Objest.keys()
+// 	 			//var panormaslocations = Object.keys(listDict[0])
+// 	 			//initPano(panormaslocations);
+// 	 			}
+// 	 		};
+// 	 	xhttp.open("GET","userlocation?lat="+lat+"&lon="+lng,true);
+// 	 	xhttp.send();
+	 	var url = "userlocation?lat="+lat+"&lon="+lng;
+	 	$.getJSON(url, function( data ) {
+		  	 	document.getElementsByClassName("station-worddetails")[0].innerHTML = generateContent(data[0]);
+	 			document.getElementsByClassName("station-worddetails")[1].innerHTML = generateContent(data[1]);
+	 			document.getElementsByClassName("station-worddetails")[2].innerHTML = generateContent(data[2]);
+	 			var i;
+	 			var panoramalocations = [];
+	 			for (i= 0; i<data.length;i++){
+	 				document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i]);
+	 				panoramalocations.push({lat: data[i]["lat"],lng: data[i]["lng"]})
+	 			}
+	 			func(panoramalocations);
+	 				
+		});
+	}
+	
+	
+	
+	getLocation();
 
-	function getlocation(){
+	/*function getlocation(){
 		console.log("getLocation")
 		if(navigator.geolocation){
 			navigator.geolocation.getCurrentPosition(setMapCenter);
@@ -64,8 +116,7 @@ function initMap(){
  		};
  	xhttp.open("GET","userlocation?lat="+lat+"&lon="+lng,true);
  	xhttp.send();
- }
- 
+ } */
 
 
 	// get the data from the flask
@@ -75,7 +126,7 @@ function initMap(){
 	var bike_stands = {{ bike_stands }};
 	var available_bikes = {{ available_bikes }};
 	var category = {{ category }};
-
+	//var stationInfo = {{ stationInfo }};
 	
 	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
 	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
@@ -116,7 +167,7 @@ function initMap(){
 	
 	//initPano(panormaslocations);
 	
-	
+	function updatePano()
 	
 	
 	
@@ -146,8 +197,10 @@ function initMap(){
   		element.infowindow.setPosition(element.position);
   		element.infowindow.open(map, element);
   		console.log(element.position.toString());
-  		console.log(element.position["lat"]);
-  		setCenterAndList(element.position['lat'],element.position["lng"]);
+  		console.log(element.getPosition().lat());
+  		console.log(element.position[0]);
+  		console.log(element.position[1]);
+  		setCenterAndList(element.getPosition().lat(),element.getPosition().lng());
   		});
   });
   
@@ -160,7 +213,7 @@ function initMap(){
  	var xhttp = new XMLHttpRequest();
  	xhttp.onreadystatechange = function(){
  		if (this.readyState == 4 && this.status == 200){
- 			document.getElementById("occupancy-bar").innerHTML=this.responseText;
+ 			//document.getElementById("occupancy-bar").innerHTML=this.responseText;
  			console.log(this.responseText);
  			
  			var jsonText = this.responseText;
@@ -176,6 +229,14 @@ function initMap(){
  
  function generateContent(respon){
  	//return "<div class='info'><h1>"+respon+"</h1></div>"
+ 	str = '<h1> StationNO. '+respon.number.toString()+'  '+respon.name+ '</h1>';
+ 	str += '<p> Status: '+ respon.status + '</p>';
+ 	str += '<p> Address: '+ respon.address + '</p>';
+ 	str += '<p> Availible Bike: '+ respon.address + '</p>';
+ 	str += '<p> Bike Stands: '+ respon.address + '</p>';
+ 	
+ 	return str;
+ 	
  }
  
  
