@@ -2,13 +2,199 @@
 // script to draw circle on the screen
 
 function initMap(){
-	// user's default location
-	var cord = {lat:53.3439118,lng:-6.2658777};
+
+      /*first operation: initlize the map staion and center */
+      var mapInfo = {{ mapInfo | safe }};
+      
+      console.log(mapInfo);
+      
+      // user's default location
+	  var cord = mapInfo.centerCord;
+	  
+	  console.log(cord);
 	
-	// init map instance
-	var map=new google.maps.Map(document.getElementById('map'),{
+	  // init map instance
+	  var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
 		center:cord});
+		
+	  // Mark the user location with marker first.
+	  var userMarker = new google.maps.Marker({
+			position: cord,
+			customInfo: "2",
+			icon:{
+			url: "{{ url_for('static', filename='images/self.png') }}",
+			scaledSize: new google.maps.Size(64, 64)},
+			map: map
+		});
+		
+	   /* Mark all the station Marker */
+	   	  
+	  // load all images
+	  var imagepath =["{{ url_for('static', filename='images/C0.png') }}","{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}","{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"];
+	
+	  var numArray = Object.keys(mapInfo);
+	  
+	  console.log(numArray)
+	  
+	  var infowindow = new google.maps.InfoWindow(); 
+	
+	  var markers = numArray.map(function(numStation, i){
+	  
+	    // before click, the info window  is empty
+	    // var locationInfoWindow = new google.maps.InfoWindow(); 
+		
+		var stationCord ={lat:mapInfo[numStation].lat,lng:mapInfo[numStation].lng};
+		
+		var marker = new google.maps.Marker({
+			position: stationCord,
+			customInfo: numStation,
+			icon:{
+			url: imagepath[mapInfo[numStation].category],
+			scaledSize: new google.maps.Size(64, 64)},
+			map: map,
+			//infowindow:locationInfoWindow
+		});
+		
+		google.maps.event.addListener(marker, "click", function(){
+			setGraph(marker.customInfo);
+			setList(marker.position.lat(),marker.position.lng());
+			//getPano(marker);
+			clickedMarker = marker;
+    		sv.getPanoramaByLocation(marker.getPosition(), 50, processSVData);
+				//getPano(marker);
+			});
+			
+		return marker
+	 });
+	 
+	 // the content in the infowindow
+	var content = document.createElement("DIV");
+	var title = document.createElement("DIV");
+	content.appendChild(title);
+	var streetview = document.createElement("DIV");
+	streetview.style.width = "200px";
+	streetview.style.height = "200px";
+	content.appendChild(streetview);
+	var htmlContent = document.createElement("DIV");
+	content.appendChild(htmlContent);
+	
+	// Create the infowindow instance
+	var infowindow = new google.maps.InfoWindow({content:content}); 
+	 
+	var sv = new google.maps.StreetViewService();
+	var clickedMarker = null;
+	var pano = null;
+	var pin = new google.maps.MVCObject();
+     
+   google.maps.event.addListenerOnce(infowindow, "domready", function(){
+		pano = new google.maps.StreetViewPanorama(streetview, {
+		    navigationControl: false,
+		    enableCloseButton: false,
+		    addressControl: false,
+		    linksControl: false,
+		    visible: true
+  		});
+		pano.bindTo("Position",pin);
+   	});
+     
+     
+  function processSVData(data, status) {
+  if (status == google.maps.StreetViewStatus.OK) {
+    var marker = clickedMarker;
+    openInfoWindow(clickedMarker);
+
+    if (!!pano && !!pano.setPano) {
+
+      pano.setPano(data.location.pano);
+      pano.setPov({
+        heading: 270,
+        pitch: 0,
+        zoom: 1
+      });
+      pano.setVisible(true);
+
+      google.maps.event.addListener(marker, 'click', function() {
+
+        var markerPanoID = data.location.pano;
+        // Set the Pano to use the passed panoID
+        pano.setPano(markerPanoID);
+        pano.setPov({
+          heading: 270,
+          pitch: 0,
+          zoom: 1
+        });
+        pano.setVisible(true);
+      });
+    }
+  } else {
+    openInfoWindow(clickedMarker);
+    title.innerHTML = clickedMarker.getTitle() + "<br>Street View data not found for this location";
+    htmlContent.innerHTML = clickedMarker.myHtml;
+    pano.setVisible(false);
+    // alert("Street View data not found for this location.");
+  }
+}
+
+
+
+ 		function openInfoWindow(marker) {
+	  		title.innerHTML = marker.customInfo;
+    		htmlContent.innerHTML = generateContent(mapInfo[marker.customInfo]);
+    		pin.set("position", marker.getPosition());
+    		infowindow.open(map, marker);
+	  		}	
+	
+	
+	getLocation();
+
+   /* functions which get user's location and reset the map center */
+	//If user's location between default location is greater than 2km, still use the default location 
+	function getLocation(){
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(setUserMarker);
+		}
+	};
+	
+	function setUserMarker(position){ 
+		//mark uers' locaiton with a marker
+		//map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
+		var cord = {lat:position.coords.latitude, lng:position.coords.longitude };
+		userMarker.setPosition(cord);
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		setMapCenter(lat,lng);
+		setList(lat,lng);
+	};
+
+	
+	function setMapCenter(lat,lng){
+		var url = "mapCenter?lat="+lat+"&lng="+lng;
+		$.getJSON(url, function(data){
+			console.log(data);
+			map.setCenter(data.centerCord);			
+		})
+	};
+	
+	function setList(lat,lng){
+		var url = "list?lat="+lat+"&lng="+lng;
+		$.getJSON(url, function(data){
+			var i;
+	 		for (i= 0; i<data.length;i++){
+	 			document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i]);
+	 		}	
+		})
+	};
+	
+    function setGraph(number){
+	 	var url = "getGraph?num="+number;
+	 	$.getJSON(url, function(data){
+	 		var graphdata = google.visualization.arrayToDataTable(data);
+	 	    chart.draw(graphdata, options);
+			});
+	};
+
+
 
 
 //	##################################################################################################
@@ -24,74 +210,17 @@ function initMap(){
         });
 
 
-
-		
-	var marker = new google.maps.Marker({
-			position: cord,
-		center:{lat:53.3439118,lng:-6.2658777}
-	});
-	
-	// init user location's marker
-	var marker = new google.maps.Marker({
-			position: cord,
-			customInfo: "2",
-			icon:{
-			url: "{{ url_for('static', filename='images/self.png') }}",
-			scaledSize: new google.maps.Size(64, 64)},
-			map: map
-		});
-	
-	// get user location and reset the map's center 
-		//Get user location, if not, use the default location
-	//If user's location between default location is greater than 2km, still use the default location 
-	function getLocation(){
-		if(navigator.geolocation){
-			navigator.geolocation.getCurrentPosition(setMapCenter);
-		}
-	};
-	
-	function setMapCenter(position){ 
-		//mark uers' locaiton with a marker
-		//map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
-		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
-		marker.setPosition(cord);
-		setCenterAndList(position.coords.latitude, position.coords.longitude,initPano);
-	};
-	
-	// with pure JAvascript to send query
-	function setCenterAndList(lat,lng,func){
-	 	var url = "userlocation?lat="+lat+"&lon="+lng;
-	 	$.getJSON(url, function( data ) {
-		  	 	document.getElementsByClassName("station-worddetails")[0].innerHTML = generateContent(data[0]);
-	 			document.getElementsByClassName("station-worddetails")[1].innerHTML = generateContent(data[1]);
-	 			document.getElementsByClassName("station-worddetails")[2].innerHTML = generateContent(data[2]);
-	 			var i;
-	 			var panoramalocations = [];
-	 			for (i= 0; i<data.length;i++){
-	 				document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i]);
-	 				panoramalocations.push({lat: data[i]["lat"],lng: data[i]["lng"]})
-	 			}
-	 			func(panoramalocations);
-	 				
-		});
-	};
-	
-	
-	
-	getLocation();
-
 searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
 
           if (places.length == 0) {
             return;
           }
-
+		  spotmarkers = [];
           // Clear out the old markers.
           spotmarkers.forEach(function(marker) {
             marker.setMap(null);
           });
-          spotmarkers = [];
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
@@ -126,111 +255,21 @@ searchBox.addListener('places_changed', function() {
             var searchLat = place.geometry.location.lat();
             var searchLon = place.geometry.location.lng();
 
-            bikerank(searchLat,searchLon);
-
-
-    var url = "getstations?lng="+searchLon+"&lat="+searchLat;
-    $.getJSON(url, function(data){
-
-            station1 = data[0][1]
-            station2 = data[1][1]
-            station3 = data[2][1]
-//            station4 = data[3]
-//            station4 = data[4]
-})
+            setList(searchLat, searchLon);
+            
      });
              map.fitBounds(bounds);
 // Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
 
 
         });
-	// get the data from the flask
-	// it's not the ideal way to get data, just a test, will prove at the next level
-	var positions = {{ locations | tojson | safe }};
-	var number = {{ number }};
-	var bike_stands = {{ bike_stands }};
-	var available_bikes = {{ available_bikes }};
-	var category = {{ category }};
-	//var stationInfo = {{ stationInfo }};
-	
-	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
-	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
-	"{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"]
-	var markers = positions.map(function(location, i){
-	
-		var locationInfoWindow = new google.maps.InfoWindow({
-			content:infoWindowContent(number[i])
-		});
-		return new google.maps.Marker({
-			position: positions[i],
-			customInfo: number[i].toString(),
-			icon:{
-			url: imagepath[category[i]],
-			scaledSize: new google.maps.Size(64, 64)},
-			map:map,
-			infowindow:locationInfoWindow
-		})
-	});
-	// for the street view part
-	//panormaslocations= positions.slice(0, 3);
-	function initPano(panormaslocations){
-	var panoramas = panormaslocations.map(function(location, i){
-		var id = "station-"+i.toString();
-		console.log(id)
-		var panorama = new google.maps.StreetViewPanorama(
-			document.getElementById(id), {
-				position: location,
-				pov:{
-					heading: 34,
-					pitch: 10
-				}
-			}
-		);
-		map.setStreetView(panorama);
-		return panorama
-	});};
-	
-	//initPano(panormaslocations);
-  
-  var infoMark = false;
-  
-  markers.forEach(function(element){
-  	// with query to request to the flask
-  	
-  	//var infowindow = new google.maps.InfoWindow({content: loadMore(element.label)});
-  	element.addListener('click',function(){
-  		console.log(element.customInfo);
-  		hideAllInfoWindow(markers, map);
-  		loadMore(element.customInfo);
-  		element.infowindow.setPosition(element.position);
-  		element.infowindow.open(map, element);
-  		console.log(element.position.toString());
-  		console.log(element.getPosition().lat());
-  		console.log(element.position[0]);
-  		console.log(element.position[1]);
-  		setCenterAndList(element.getPosition().lat(),element.getPosition().lng());
-  		});
-  });
 
-	
- function loadMore(number){
- 	var xhttp = new XMLHttpRequest();
- 	xhttp.onreadystatechange = function(){
- 		if (this.readyState == 4 && this.status == 200){
- 			//document.getElementById("occupancy-bar").innerHTML=this.responseText;
- 			console.log(this.responseText);	
- 			var jsonText = this.responseText;
- 			var array = JSON.parse(jsonText);
- 			var data = google.visualization.arrayToDataTable(array);
- 			chart.draw(data, options);
- 			}
- 		};
- 	xhttp.open("GET","getdetail?num="+number,true);
- 	xhttp.send();
- }
+  
+  var infoMark = false;}
+
  
  
- function generateContent(respon){
+function generateContent(respon){
  	//return "<div class='info'><h1>"+respon+"</h1></div>"
  	str = '<h1> StationNO. '+respon.number.toString()+'  '+respon.name+ '</h1>';
  	str += '<p> Status: '+ respon.status + '</p>';
@@ -243,9 +282,7 @@ searchBox.addListener('places_changed', function() {
  }
  
  
- function infoWindowContent(content){
- 	return "<p class='info'>"+content+'</p>'
- }
+
 //function change color from red to blue
 function changeColor(num,totalNum){
 	var r,b;
@@ -255,12 +292,15 @@ function changeColor(num,totalNum){
 	return color
 }
 
-function hideAllInfoWindow(markers,map){
-	markers.forEach(function(marker){
-		marker.infowindow.close(map,marker);
-	})};
 	
-}
 
+
+/* The following  content is about all the function related to infowindows shown on the map */
+// 
+// function hideAllInfoWindow(markers,map){
+// 	markers.forEach(function(marker){
+// 		marker.infowindow.close(map,marker);
+// 	})};
+// 	
 
 </script>

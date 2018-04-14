@@ -125,8 +125,13 @@ class  stationOperation:
         stationJSON = {}
         for key in self.stationDictionary.keys():
             stationJSON.update({key: self.stationDictionary[key].getJSON()})
-        stationJSON.update({"centerCord": self.mapCenterCord})
+        stationJSON.update({"centerCord": {"lat": self.mapCenterCord[0], "lng":self.mapCenterCord[1]}})
         return stationJSON
+    
+    def getMapCenterJSON(self):
+        # After getting users' cord , it i s better to rest the map' location
+        return {"centerCord": {"lat": self.mapCenterCord[0], "lng": self.mapCenterCord[1]}}
+        
     
     def updateMapCenter(self,cord):
         # Compare with user's location

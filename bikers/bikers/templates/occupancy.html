@@ -12,7 +12,10 @@
 	var options;
 	
 	function drawChart() {
-		var data = google.visualization.arrayToDataTable({{ data | safe }});
+		var initlizeData = {{ data | safe }};
+		var data = google.visualization.arrayToDataTable(initlizeData);
+		
+		console.log(initlizeData)
 	
 	  	options = {
 	    title: 'Occupancy at selected station',
@@ -20,20 +23,20 @@
 	    legend: { position: 'bottom' }
 		};
 		
-	function resizeChart () {
-	    chart.draw(data, options);
-	}
-	
-	if (document.addEventListener) {
-	    window.addEventListener('resize', resizeChart);
-	}
-	else if (document.attachEvent) {
-	    window.attachEvent('onresize', resizeChart);
-	}
-	else {
-	    window.resize = resizeChart;
-	}
-		
+// 	function resizeChart () {
+// 	    chart.draw(data, options);
+// 	}
+// 	
+// 	if (document.addEventListener) {
+// 	    window.addEventListener('resize', resizeChart);
+// 	}
+// 	else if (document.attachEvent) {
+// 	    window.attachEvent('onresize', resizeChart);
+// 	}
+// 	else {
+// 	    window.resize = resizeChart;
+// 	}
+// 		
 	chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 	
 	chart.draw(data, options);
