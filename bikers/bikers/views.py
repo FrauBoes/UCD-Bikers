@@ -24,8 +24,7 @@ def index():
     weather = getWeatherAPI.getWeather()
     
     mapInfo = mapInstance.getStationAndMapCenterJSON()
-    
-    print(mapInfo)
+
     # Get weekday and data
     weekday = datetime.datetime.today().weekday() + 2
     data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 8)) # default station 8 Saint Stephen's Green
