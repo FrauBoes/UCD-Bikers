@@ -30,5 +30,6 @@ class BikersTestCase(unittest.TestCase):
         assert getOccupancy.convert_data(getOccupancy.get_station_occupancy(1, 1)) is sorted
 
 if __name__ == "__main__":
-    import sys;sys.argv = ['', 'Test.testName']
+    import sys;
+    sys.argv = ['', 'Test.testName']
     unittest.main()

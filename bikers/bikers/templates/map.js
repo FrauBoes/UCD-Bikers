@@ -1,141 +1,288 @@
-
-<script>
+<script> 
 // script to draw circle on the screen
 
 function initMap(){
-	// get the user's geolocation
-	var cord;
+
+      /*first operation: initlize the map staion and center */
+      var mapInfo = {{ mapInfo | safe }};
+      
+      console.log(mapInfo);
+      
+      // user's default location
+	  var cord = mapInfo.centerCord;
+	  
+	  console.log(cord);
 	
-	cord = {lat:53.3439118,lng:-6.2658777};
-	
-	var map=new google.maps.Map(document.getElementById('map'),{
+	  // init map instance
+	  var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
 		center:cord});
 		
-	var marker = new google.maps.Marker({
+	  // Mark the user location with marker first.
+	  var userMarker = new google.maps.Marker({
 			position: cord,
-		center:{lat:53.3439118,lng:-6.2658777}
-	});
-	
-	var marker = new google.maps.Marker({
-			position: {lat:53.3439118,lng:-6.2658777},
 			customInfo: "2",
 			icon:{
 			url: "{{ url_for('static', filename='images/self.png') }}",
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map
 		});
-
-	function getlocation(){
-		console.log("getLocation")
-		if(navigator.geolocation){
-			navigator.geolocation.getCurrentPosition(setMapCenter);
-		}
-	}
+		
+	   /* Mark all the station Marker */
+	   	  
+	  // load all images
+	  var imagepath =["{{ url_for('static', filename='images/C0.png') }}","{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}","{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"];
 	
-	getlocation();
+	  var numArray = Object.keys(mapInfo);
+	  
+	  console.log(numArray)
+	  
+	  var infowindow = new google.maps.InfoWindow(); 
 	
-	//initialize the google map and set the center
-	function setMapCenter(position){
-		console.log(position)
-		map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
-		cord = {lat:position.coords.latitude, lng:position.coords.longitude };
-		marker.setPosition(cord);
-	}
-	
-
-	// get the data from the flask
-	// it's not the ideal way to get data, just a test, will prove at the next level
-	positions = {{ locations | tojson | safe }};
-	number = {{ number }};
-	bike_stands = {{ bike_stands }};
-	available_bikes = {{ available_bikes }};
-	category = {{ category }};
-
-	
-	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
-	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
-	"{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"]
-	var markers = positions.map(function(location, i){
-	
-		var locationInfoWindow = new google.maps.InfoWindow({
-			content:infoWindowContent(number[i])
-		});
-		return new google.maps.Marker({
-			position: positions[i],
-			customInfo: number[i].toString(),
+	  var markers = numArray.map(function(numStation, i){
+	  
+	    // before click, the info window  is empty
+	    // var locationInfoWindow = new google.maps.InfoWindow(); 
+		
+		var stationCord ={lat:mapInfo[numStation].lat,lng:mapInfo[numStation].lng};
+		
+		var marker = new google.maps.Marker({
+			position: stationCord,
+			customInfo: numStation,
 			icon:{
-			url: imagepath[category[i]],
+			url: imagepath[mapInfo[numStation].category],
 			scaledSize: new google.maps.Size(64, 64)},
-			map:map,
-			infowindow:locationInfoWindow
-		})
-	});
-	
-	
-	var imagepath =["{{ url_for('static', filename='images/C0.png') }}",
-	"{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}",
-	"{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"]
-	var markers = positions.map(function(location, i){
-	
-		var locationInfoWindow = new google.maps.InfoWindow({
-			content:infoWindowContent(number[i])
+			map: map,
+			//infowindow:locationInfoWindow
 		});
-		return new google.maps.Marker({
-			position: positions[i],
-			customInfo: number[i].toString(),
-			icon:{
-			url: imagepath[category[i]],
-			scaledSize: new google.maps.Size(64, 64)},
-			map:map,
-			infowindow:locationInfoWindow
-		})
+		
+		google.maps.event.addListener(marker, "click", function(){
+			setGraph(marker.customInfo);
+			setList(marker.position.lat(),marker.position.lng());
+			//getPano(marker);
+			clickedMarker = marker;
+    		sv.getPanoramaByLocation(marker.getPosition(), 50, processSVData);
+				//getPano(marker);
+			});
+			
+		return marker
+	 });
+	 
+	 // the content in the infowindow
+	var content = document.createElement("DIV");
+	var title = document.createElement("DIV");
+	content.appendChild(title);
+	var streetview = document.createElement("DIV");
+	streetview.style.width = "200px";
+	streetview.style.height = "200px";
+	content.appendChild(streetview);
+	var htmlContent = document.createElement("DIV");
+	content.appendChild(htmlContent);
 	
-	});
-	
-
-  var infoMark = false;
-  markers.forEach(function(element){
-  	// with query to request to the flask
-  	
-  	//var infowindow = new google.maps.InfoWindow({content: loadMore(element.label)});
-  	element.addListener('click',function(){
-  		console.log(element.customInfo);
-  		hideAllInfoWindow(markers, map);
-  		loadMore(element.customInfo);
-  		element.infowindow.setPosition(element.position);
-  		element.infowindow.open(map, element);
-  		console.log(element.position.toString());
+	// Create the infowindow instance
+	var infowindow = new google.maps.InfoWindow({content:content}); 
+	 
+	var sv = new google.maps.StreetViewService();
+	var clickedMarker = null;
+	var pano = null;
+	var pin = new google.maps.MVCObject();
+     
+   google.maps.event.addListenerOnce(infowindow, "domready", function(){
+		pano = new google.maps.StreetViewPanorama(streetview, {
+		    navigationControl: false,
+		    enableCloseButton: false,
+		    addressControl: false,
+		    linksControl: false,
+		    visible: true
   		});
-  });
+		pano.bindTo("Position",pin);
+   	});
+     
+     
+  function processSVData(data, status) {
+  if (status == google.maps.StreetViewStatus.OK) {
+    var marker = clickedMarker;
+    openInfoWindow(clickedMarker);
 
-	}
+    if (!!pano && !!pano.setPano) {
+
+      pano.setPano(data.location.pano);
+      pano.setPov({
+        heading: 270,
+        pitch: 0,
+        zoom: 1
+      });
+      pano.setVisible(true);
+
+      google.maps.event.addListener(marker, 'click', function() {
+
+        var markerPanoID = data.location.pano;
+        // Set the Pano to use the passed panoID
+        pano.setPano(markerPanoID);
+        pano.setPov({
+          heading: 270,
+          pitch: 0,
+          zoom: 1
+        });
+        pano.setVisible(true);
+      });
+    }
+  } else {
+    openInfoWindow(clickedMarker);
+    title.innerHTML = clickedMarker.getTitle() + "<br>Street View data not found for this location";
+    htmlContent.innerHTML = clickedMarker.myHtml;
+    pano.setVisible(false);
+    // alert("Street View data not found for this location.");
+  }
+}
+
+
+
+ 		function openInfoWindow(marker) {
+	  		title.innerHTML = marker.customInfo;
+    		htmlContent.innerHTML = generateContent(mapInfo[marker.customInfo]);
+    		pin.set("position", marker.getPosition());
+    		infowindow.open(map, marker);
+	  		}	
 	
- function loadMore(number){
- 	var xhttp = new XMLHttpRequest();
- 	xhttp.onreadystatechange = function(){
- 		if (this.readyState == 4 && this.status == 200){
- 			console.log(this.responseText);
- 			
- 			var jsonText = this.responseText;
- 			var array = JSON.parse(jsonText);
- 			var data = google.visualization.arrayToDataTable(array);
- 			chart.draw(data, options);
- 			}
- 		};
- 	xhttp.open("GET","getdetail?num="+number,true);
- 	xhttp.send();
- }
+	
+	getLocation();
+
+   /* functions which get user's location and reset the map center */
+	//If user's location between default location is greater than 2km, still use the default location 
+	function getLocation(){
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(setUserMarker);
+		}
+	};
+	
+	function setUserMarker(position){ 
+		//mark uers' locaiton with a marker
+		//map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
+		var cord = {lat:position.coords.latitude, lng:position.coords.longitude };
+		userMarker.setPosition(cord);
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		setMapCenter(lat,lng);
+		setList(lat,lng);
+	};
+
+	
+	function setMapCenter(lat,lng){
+		var url = "mapCenter?lat="+lat+"&lng="+lng;
+		$.getJSON(url, function(data){
+			console.log(data);
+			map.setCenter(data.centerCord);			
+		})
+	};
+	
+	function setList(lat,lng){
+		var url = "list?lat="+lat+"&lng="+lng;
+		$.getJSON(url, function(data){
+			var i;
+	 		for (i= 0; i<data.length;i++){
+	 			document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i]);
+	 		}	
+		})
+	};
+	
+    function setGraph(number){
+	 	var url = "getGraph?num="+number;
+	 	$.getJSON(url, function(data){
+	 		var graphdata = google.visualization.arrayToDataTable(data);
+	 	    chart.draw(graphdata, options);
+			});
+	};
+
+
+
+
+//	##################################################################################################
+
+// Create the search box and link it to the UI element.
+        var input = document.getElementById('place_search');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+
+searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+		  spotmarkers = [];
+          // Clear out the old markers.
+          spotmarkers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            spotmarkers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+
+            var searchLat = place.geometry.location.lat();
+            var searchLon = place.geometry.location.lng();
+
+            setList(searchLat, searchLon);
+            
+     });
+             map.fitBounds(bounds);
+// Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
+
+
+        });
+
+  
+  var infoMark = false;}
+
  
  
- function generateContent(respon){
+function generateContent(respon){
  	//return "<div class='info'><h1>"+respon+"</h1></div>"
+ 	str = '<h1> StationNO. '+respon.number.toString()+'  '+respon.name+ '</h1>';
+ 	str += '<p> Status: '+ respon.status + '</p>';
+ 	str += '<p> Address: '+ respon.address + '</p>';
+ 	str += '<p> Availible Bike: '+ respon.address + '</p>';
+ 	str += '<p> Bike Stands: '+ respon.address + '</p>';
+ 	
+ 	return str;
+ 	
  }
  
  
- function infoWindowContent(content){
- 	return "<p class='info'>"+content+'</p>'
- }
+
 //function change color from red to blue
 function changeColor(num,totalNum){
 	var r,b;
@@ -145,10 +292,15 @@ function changeColor(num,totalNum){
 	return color
 }
 
-function hideAllInfoWindow(markers,map){
-	markers.forEach(function(marker){
-		marker.infowindow.close(map,marker);
-	});
-}
+	
+
+
+/* The following  content is about all the function related to infowindows shown on the map */
+// 
+// function hideAllInfoWindow(markers,map){
+// 	markers.forEach(function(marker){
+// 		marker.infowindow.close(map,marker);
+// 	})};
+// 	
 
 </script>

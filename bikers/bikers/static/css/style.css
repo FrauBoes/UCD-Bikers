@@ -261,6 +261,28 @@ footer {
 }
 
 #footer-links li {
-	display: inline;
-	padding: 3%;
+    display: inline;
+    padding: 3%;
 }
+
+
+
+	
+.station-worddetails{
+	width:300px;
+	height:200px;
+	top: 0;
+	left:0;
+}
+
+.station-worddetails{
+	top: 0;
+	z-index: 10;
+	color:black;
+	font-size: 12px;
+	opacity: 0.4;
+	}
+#streetView{
+	width:300px;
+	height:200px;
+}			
