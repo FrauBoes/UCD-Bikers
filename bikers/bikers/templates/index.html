@@ -7,7 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,19 +19,34 @@
 </head>
  
 <body>
-    <header>
-        <div class="wrapper">
-            <nav>
-                <a href="#">UCD Bikers</a>
-                <a href="https://www.google.ie/maps?hl=en" target="_blank">Google Maps</a>
-                <a href="https://openweathermap.org/" target="_blank">Open Weather</a>
-                <a href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a>
-                <div class="clear"></div>
-            </nav>
-        </div>    
-    </header>
-    
-    <div id="search-bar">
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">UCD_bikers</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Bikes map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Traffic map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Weather map</a>
+				</li>    
+			</ul>
+		</div>  	,
+	</nav>
+<div class = "container" >
+	<form class="form-inline" id="place_search">
+		<span>hahhah</span>
+		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px">
+	</form>
+	<div id="map"></div>
+</div>
+	
+    <!-- <div id="search-bar">
         <div class="wrapper">
             <form id="search-form" onsubmit="">
 
@@ -41,7 +60,7 @@
             		<div class="clear"></div>
             </form>  
         </div>
-    </div>
+    </div> -->
     
     
     <div id="weather-bar">
