@@ -19,8 +19,19 @@
 	
 	  	options = {
 	    title: 'Occupancy at selected station',
+	    legend: {position: 'none'},
 	    curveType: 'function',
-	    legend: { position: 'bottom' }
+
+	    hAxis: { ticks: [{v:3.0, f:'03:00'}, {v:6.0, f:'06:00'},{v:9.0, f:'09:00'},{v:12.0, f:'12:00'},{v:15.0, f:'15:00'},{v:18.0, f:'18:00'},{v:21.0, f:'21:00'},{v:24.0, f:'24:00'}],
+
+	    },
+
+        vAxis :{
+            viewWindow: {   min: 0,     max: 100},
+            gridlines: { count: 2 },
+            ticks: [{v:25, f:'25%'},{v:50, f:'50%'},{v:75, f:'75%'},{v:100, f:'100%'}]
+            }
+
 		};
 		
 	function resizeChart () {

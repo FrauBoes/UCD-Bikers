@@ -29,15 +29,18 @@ def convert_data(data):
     d = {}  # dictionary to store and aggregate entries based on time bin
     
     for entry in data:
+
         hour, minute = get_hour(entry[0]), get_minute(entry[0])
-        time = round(hour + minute*0.1,1)  # time in format hh.m (6 bins)
-        avail = entry[1]/entry[2]  # number of bikes / number of stands
-        
-        # get average of availability per time bin
-        if time in d:
-            d[time] = (d[time] + avail) / 2
-        else:
-            d[time] = avail
+        if minute%0.2 == 0:
+            time = round(hour + minute*0.1, 1)  # time in format hh.m (6 bins)
+
+            avail = int((entry[1]/entry[2])*100)  # number of bikes / number of stands
+
+            # get average of availability per time bin
+            if time in d:
+                d[time] = (d[time] + avail) / 2
+            else:
+                d[time] = avail
     
     # sort entries in dictionary to get chronologically sorted time bins
     d = OrderedDict(sorted(d.items()))

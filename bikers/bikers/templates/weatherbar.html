@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+
 	<div class='Wbar' id='weatherbar'>
 		<div class='weathertitle'>
 			<h4 class="weatherText">Today's forecast</h4>
@@ -40,7 +35,7 @@
 	   else if (hours>=21 && hours<24) {
 	       rtime=21;}
 
-	   var disp1 ="<div class='icon'><\/div>";   // Used to form weather icons and temperature
+	   var disp1 ="<div class='icon'></div>";   // Used to form weather icons and temperature
 	   var disp2 ="";                           // Used to form times
 	   var slot="";    //time slot value as string
 	   var j = 1;
@@ -56,21 +51,19 @@
 
 	       disp1 += "<div class='icon'><img class='img' src='../static/images/weather-icons/" + weather + ".png'>"
 	       //there is 1 less temperature than image
-	       if (j<8){disp1+="<span class='temp'>   "+temp+"&#8451<\/span>"}
-	       disp1+="<\/div>";
-	       disp2 += "<div class='time'>"+slot+"<\/div>";
+	       if (j<8){disp1+="<span class='temp'>   "+temp+"&#8451</span>"}
+	       disp1+="</div>";
+	       disp2 += "<div class='time'>"+slot+"</div>";
 
 	       // Temperature needs to be converted from Kalvin
 	       temp = parseInt(obj[j].main.temp -273.15);
 	       weather = obj[j].weather[0].icon;
 	       j++;
 	   }
-	   disp2 += "<div class='time'><\/div>"
+	   disp2 += "<div class='time'></div>"
 
 	   // Apply html to weather bar divs
 	   document.getElementById("uWrap").innerHTML = disp1;
 	   document.getElementById("lWrap").innerHTML = disp2;
 
 	</script>
-</body>
-</html>
