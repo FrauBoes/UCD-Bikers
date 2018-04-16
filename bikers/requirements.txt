@@ -24,6 +24,7 @@ requests==2.18.4
 setuptools==39.0.1
 six==1.11.0
 urllib3==1.22
+virtualenv==15.1.0
 Werkzeug==0.14.1
 wheel==0.31.0
 whichcraft==0.4.1
