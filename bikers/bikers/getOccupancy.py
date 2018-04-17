@@ -26,29 +26,29 @@ def get_station_occupancy(weekday,number):
 # returns occupancy data as array of arrays [time, degree of availability]
 def convert_data(data):
     occupancy_array = [['Time of the day', 'Degree of availability']]
+
     d = {}  # dictionary to store and aggregate entries based on time bin
     
     for entry in data:
 
         hour, minute = get_hour(entry[0]), get_minute(entry[0])
-        if minute%0.2 == 0:
-            time = round(hour + minute*0.1, 1)  # time in format hh.m (6 bins)
+        time = hour + (minute*0.5)+0.25  # time in format hh.m (2 bins)
 
-            avail = int((entry[1]/entry[2])*100)  # number of bikes / number of stands
+        avail = int((entry[1]/entry[2])*100)  # number of bikes / number of stands
 
-            # get average of availability per time bin
-            if time in d:
-                d[time] = (d[time] + avail) / 2
-            else:
-                d[time] = avail
-    
+        # get average of availability per time bin
+        if time in d:
+            d[time] = (d[time] + avail) / 2
+        else:
+            d[time] = avail
+
     # sort entries in dictionary to get chronologically sorted time bins
     d = OrderedDict(sorted(d.items()))
     
     for pair in d:
         inner_array = []
         inner_array.append(pair)
-        inner_array.append(round(d[pair],2))
+        inner_array.append(round(d[pair], 2))
         occupancy_array.append(inner_array)
     
     return occupancy_array
@@ -62,7 +62,8 @@ def get_hour(timesstamp):
 
 # returns a tuple with hour (0-23) and minute frame (0-5)
 def get_minute(timesstamp):
-    minute = round((int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) // 10),1)
+    #minute = round((int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M') // 10), 1)
+    minute = round(int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) / 60, 0)
     return minute
 
  
