@@ -36,16 +36,17 @@
 					<a class="nav-link" href="#">Weather map</a>
 				</li>    
 			</ul>
+		</div> 
+		<div class="row" id="weatherbar" style ="float: right; width:45%">
+        	{% include "weatherbar.html" %}
 		</div>  	,
 	</nav>
-<div class = "container" >
-	<form class="form-inline" id="place_search">
-		<span>hahhah</span>
-		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px">
+<div class = "container-fluid" >
+	<form class="form-inline">
+		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
 	</form>
-	<div id="map"></div>
 </div>
-	
+<div class ="container-fluid" style="height: 90vh" id="map"></div>
     <!-- <div id="search-bar">
         <div class="wrapper">
             <form id="search-form" onsubmit="">
@@ -63,11 +64,11 @@
     </div> -->
     
     
-    <div id="weather-bar">
+    <!-- <div id="weather-bar">
     	<div class="wrapper">
         	{% include "weatherbar.html" %}
 		</div>
-    </div>
+    </div> -->
   
 
     <div id="occupancy-bar">
