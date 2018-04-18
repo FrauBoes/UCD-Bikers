@@ -4,6 +4,7 @@ Web application for Dublin Bikes with latest updates and past occupancy trends.
 
 
 ![Dublin Bikes image](https://user-images.githubusercontent.com/28864823/38957163-ba9fb094-4351-11e8-8a96-3871ca201a09.jpg)
+
 (Photograph: Aidan Crawley/Bloomberg)
 
 
@@ -51,6 +52,10 @@ For example, on Ubuntu:
 
 ## Deployment
 
+
+    git clone https://github.com/FrauBoes/UCD-Bikers.git
+
+
 Check out [Deploying with Fabric](http://flask.pocoo.org/docs/0.12/patterns/fabric/#fabric-deployment) on one of the
 possible ways to automate the deployment.
 
@@ -85,9 +90,9 @@ And, most likely, it will also run behind a [reverse proxy](http://flask.pocoo.o
 
 ## Authors
 
-* **Julia Boes** - *Initial work* - [PurpleBooth](https://github.com/FrauBoes)
-* **Daragh O'Farrell** - *Initial work* - [PurpleBooth](https://github.com/Basschops)
-* **Wu Di** - *Initial work* - [PurpleBooth](https://github.com/derekwu90)
+* **Julia Boes** - [GitHub](https://github.com/FrauBoes)
+* **Daragh O'Farrell** - [GitHub](https://github.com/Basschops)
+* **Wu Di** - [GitHub](https://github.com/derekwu90)
 
 
 ## License
