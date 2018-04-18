@@ -3,6 +3,10 @@
 Web application for Dublin Bikes with latest updates and past occupancy trends
 
 
+![alt text](https://raw.githubusercontent.com/FrauBoes/UCD-bikers/master//bikers/bikers/static/images/card_icons/image.jpg)
+
+
+
 
 ## Quick Start
 
