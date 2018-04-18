@@ -181,7 +181,7 @@ function initMap(){
 		$.getJSON(url, function(data){
 			var i;
 	 		for (i= 0; i<data.length;i++){
-	 			document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i]);
+	 			document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i],i);
 	 		}	
 		})
 	};
@@ -269,16 +269,24 @@ searchBox.addListener('places_changed', function() {
 
  
  
-function generateContent(respon){
- 	//return "<div class='info'><h1>"+respon+"</h1></div>"
- 	str = '<h1> StationNO. '+respon.number.toString()+'  '+respon.name+ '</h1>';
- 	str += '<p> Status: '+ respon.status + '</p>';
- 	str += '<p> Address: '+ respon.address + '</p>';
- 	str += '<p> Availible Bike: '+ respon.address + '</p>';
- 	str += '<p> Bike Stands: '+ respon.address + '</p>';
+function generateContent(respon,i){
+	var rankImage=["{{ url_for('static', filename='images/card_icons/1.png') }}","{{ url_for('static', filename='images/card_icons/2.png') }}","{{ url_for('static', filename='images/card_icons/3.png') }}"]
+ 	str = '<div class = "card"><div class="card-header light card" ><img src="'+rankImage[i]+'" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="75" height="75"></div>'
+ 	str += '<div class ="card-body"><h6> NO.   '+respon.number.toString()+ '</h6>';
+ 	str += '<h5 class="text-black">'+ respon.address + '</h5></div>';
+ 	str += '<div class ="card-footer info card"><div class= "row"><div class="col-sm-4 text-danger"><img class = "mx-auto d-block" src ="'+"{{ url_for('static', filename='images/card_icons/status.png') }}"+ '" width="20" height="20">'
+ 	str += '<p> '+ respon.status + '</p></div>';
+ 	str += '<div class="col-sm-4"><img  class = "mx-auto d-block" src ='+"{{ url_for('static', filename='images/card_icons/bike.png') }}"+' width="20" height="20">'
+ 	str += '<p>'+ respon.availible_bike+ '</p></div>';
+ 	str += '<div class="col-sm-4"><img  class = "mx-auto d-block" src ='+"{{ url_for('static', filename='images/card_icons/space.png') }}"+' width="20" height="20">'
+ 	str += '<p>'+ respon.bike_stands + '</p></div></div></div></div>';
  	
  	return str;
  	
+ }
+ 
+ function generateInfoWindow(response){
+
  }
  
  

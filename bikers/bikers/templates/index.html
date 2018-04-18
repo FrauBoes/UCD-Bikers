@@ -37,164 +37,48 @@
 				</li>    
 			</ul>
 		</div> 
-		<div class="row" id="weatherbar" style ="float: right; width:45%">
-        	{% include "weatherbar.html" %}
-		</div>  	,
+		<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+			<div class="row" id="weatherbar" style ="float: right; width:45%">
+	        	{% include "weatherbar.html" %}
+			</div> 
+		</div>	,
 	</nav>
 <div class = "container-fluid" >
 	<form class="form-inline">
 		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
 	</form>
 </div>
-<div class ="container-fluid" style="height: 90vh" id="map"></div>
-    <!-- <div id="search-bar">
-        <div class="wrapper">
-            <form id="search-form" onsubmit="">
-
-            		<a class="current-location-button" href="">
-                		<img width="16" height="16" src="{{ url_for('static', filename='images/current-location.png') }}">
-            		</a>
-            		<input id='place_search' class="controls" placeholder="Search Box" type="text"  >
-            		<a class="search-button" href="">
-                		<img width="16" height="16" src="{{ url_for('static', filename='images/search-button.png') }}">
-            		</a>
-            		<div class="clear"></div>
-            </form>  
-        </div>
-    </div> -->
-    
-    
-    <!-- <div id="weather-bar">
-    	<div class="wrapper">
-        	{% include "weatherbar.html" %}
+<div class ="container-fluid" style="height: 60vh" id="map"></div>
+<div class ="container-fluid">
+<div class = "row">
+	<div class = "col-sm-5">
+		<h4 class="text-uppercase font-weight-bold text-left"> The best chosen Stations! </h4>
+		<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px">
+		<div class ='row'>
+			<div class = "station-worddetails col-sm-4" style="min-height:320px"></div>
+			<div class = "station-worddetails col-sm-4" style="min-height:320px"></div>
+			<div class = "station-worddetails col-sm-4" style="min-height:320px"></div>
 		</div>
-    </div> -->
-  
-
-    <div id="occupancy-bar">
-    	<div class="wrapper">
-    	{% include "occupancy.html" %}
-    	</div>
-    </div>
-  
- <div id = "streetView1></div>
-    <div id="main-block">
-        <div class="wrapper">
-            <div id="station-list">
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-
-      	<!--
-                <ul>
-<<<<<<< HEAD
-                    <li id="station-0">
-                        <h3>Top Station</h3>
-=======
-                    <li class="station-top">
-                        <h3 id="'top_station">Top Station</h3>
->>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-<<<<<<< HEAD
-                    <li id="station-1">
-                        <h3>Other Station</h3>
-=======
-                    <li class="station-other">
-                        <h3  id="second_station">Other Station</h3>
->>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-                    <li id="station-2">
-                        <h3>Other Station</h3>
-                        <p>Address and station number</p>     
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-                    <div class="clear"></div>
-                </ul>
--->
-            </div>
-            
-            <div id="map"></div>
+	</div>
+	<div class = "col-sm-7"  id = "occupancy-bar">
+			{% include "occupancy.html" %}
+	</div>
+</div>
+<div class = "container-fluid" id="footer">
+	<div class= "row" style="padding-top:10px">
+        <div  class="col-sm-4" id="footer-links">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </div>
-    </div>
-    
-    <footer>
-        <div class="wrapper">
-                <div id="footer-links">
-                    <ul >
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <div class="clear"></div>
-                    </ul>
-                </div>
-
-                <div id="footer-info">
-                    <p>@2018 UCD Bikers. All rights reserved.</p>
-                </div>
+        <div class="col-sm-8" id="footer-info">
+            <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
         </div>
-    </footer>
+      </div>
+</div>
    {% include 'map.js' %}
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2

@@ -7,10 +7,15 @@ ADAPTED FROM: https://medialoot.com/blog/how-to-code-a-homepage-template-with-ht
 
 /* Global styles */
 
+*{
+	text-align: center;
+}
+
 body {
 	background-color: #fff;
 	color: #777;
 	font: normal 15px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    text-align: center;
 }
 p {
 	line-height: 20px;
@@ -20,7 +25,6 @@ h2 {
 	font-weight: 300;
 	color: #444;
 	font-size: 30px;
-	text-align: center;
 	margin-bottom: 10px;
 }
 h3 {
@@ -231,8 +235,7 @@ header {
 }
 
 /* footer styles */
-footer {
-	padding: 15px;
+#footer {
 	background: #e6e6e6;
 	font-family: 'Roboto', serif;
 }
@@ -240,7 +243,6 @@ footer {
 /* footer-info styles */
 #footer-info {
 	text-align: center;
-	margin-top: 15px;
 }
 
 /* footer-links styles */
@@ -275,4 +277,19 @@ footer {
 #streetView{
 	width:300px;
 	height:200px;
-}			
+}
+
+.card-header light card{
+	height: 100px;}
+	
+.card-body{
+	height: 125px;
+}
+	
+h6{
+    text-align:center;}
+
+#station-list{
+	margin-top:20px;
+	margin-bottom:20px;}
+			
