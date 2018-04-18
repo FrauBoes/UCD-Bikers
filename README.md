@@ -73,7 +73,7 @@ And, most likely, it will also run behind a [reverse proxy](http://flask.pocoo.o
 
 ## Built With
 
-* [Flask](http://http://flask.pocoo.org/) - The web framework used
+* [Flask](http://flask.pocoo.org/) - The web framework used
 * [jQuery](https://jquery.com/) - JavaScript library
 * [Bootstrap](https://getbootstrap.com/) - Front-end library
 * [PyMySQL](https://github.com/PyMySQL/PyMySQL) - Python MySQL client
@@ -97,7 +97,7 @@ And, most likely, it will also run behind a [reverse proxy](http://flask.pocoo.o
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md]()LICENSE.md file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 
 ## Acknowledgments
