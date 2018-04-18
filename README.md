@@ -1,11 +1,10 @@
 # UCD-Bikers
 
-Web application for Dublin Bikes with latest updates and past occupancy trends
+Web application for Dublin Bikes with latest updates and past occupancy trends.
 
 
 ![Dublin Bikes image](https://user-images.githubusercontent.com/28864823/38957163-ba9fb094-4351-11e8-8a96-3871ca201a09.jpg)
-
-
+(Photograph: Aidan Crawley/Bloomberg)
 
 
 ## Quick Start
@@ -14,7 +13,7 @@ Run the application:
 
     make run
 
-And open it in the browser at [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+And open it in the browser at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
 
 
