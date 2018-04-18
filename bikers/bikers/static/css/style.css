@@ -27,7 +27,7 @@ h2 {
 	font-size: 30px;
 	margin-bottom: 10px;
 }
-h3 {
+h3, h4 {
 	font-weight: 300;
 	font-size: 20px;
 	color: #444;
@@ -76,9 +76,13 @@ nav {
 
 nav a {
 	color: #fff;
-	font-size: 15px;
+	font-size: 20px;
 	padding: 3%;
 }
+
+.navbar-brand{
+ font-size: 24px;
+ }
 
 /* header styles */
 header {
@@ -185,7 +189,7 @@ header {
 
 /* occupancy-bar styles */
 #occupancy-bar {
-	height: 100px;
+	height: 200px;
 	width: 100%;
 	padding-top: 1px;
 	margin: 2% 0;

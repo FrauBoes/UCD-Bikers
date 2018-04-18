@@ -196,7 +196,7 @@ function initMap(){
 	 	$.getJSON(url, function(data){
 	 		var graphdata = google.visualization.arrayToDataTable(data);
 	 	    chart.draw(graphdata, options);
-			});
+	 	    });	
 	};
 
 
@@ -276,7 +276,7 @@ searchBox.addListener('places_changed', function() {
  
 function generateContent(respon,i){
 	var rankImage=["{{ url_for('static', filename='images/card_icons/1.png') }}","{{ url_for('static', filename='images/card_icons/2.png') }}","{{ url_for('static', filename='images/card_icons/3.png') }}"]
- 	str = '<div class = "card"><div class="card-header light card" ><img src="'+rankImage[i]+'" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="60" height="60"></div>'
+ 	str = '<div class = "card"><div class="card-header light card" ><img src="'+rankImage[i]+'" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="40" height="40"></div>'
  	str += '<div class ="card-body"><h6> NO.   '+respon.number.toString()+ '</h6>';
  	str += '<h5 class="text-black">'+ respon.address + '</h5></div>';
  	str += '<div class ="card-footer info card"><div class= "row"><div class="col-sm-4 text-danger"><img class = "mx-auto d-block" src ="'+"{{ url_for('static', filename='images/card_icons/status.png') }}"+ '" width="20" height="20">'
