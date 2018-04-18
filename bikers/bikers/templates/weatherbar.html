@@ -1,3 +1,55 @@
+<!--Wrapper for icons and temperatures on top-->
+	<div class='row float-right text-white' id='uWrap'>
+		<h2>Not working</h2>
+	</div><!--Wrapper for times on the bottom-->
+	<div class='row float-right text-white' id='lWrap'></div>
+<script>
+   //construct object with weather data
+   obj = {{ weather| safe }};
+   //initialise variables. weather is icon id
+   var weather = obj[0].weather[0].icon;
+   var temp = parseInt(obj[0].main.temp -273.15);
+   var time = new Date();
+   var hours = time.getHours();
+   var rtime;
+   //find what 3hr time slot it is
+   
+   if (hours>=0 && hours<3) {
+       rtime=0;} 
+   else if (hours>=3 && hours<6) {
+       rtime=3;}
+   else if (hours>=6 && hours<9) {
+       rtime=6;}
+   else if (hours>=9 && hours<12) {
+       rtime=9;}
+   else if (hours>=12 && hours<15) {
+       rtime=12;}
+   else if (hours>=15 && hours<18) {
+       rtime=15;}
+   else if (hours>=18 && hours<21) {
+       rtime=18;}
+   else if (hours>=21 && hours<24) {
+       rtime=21;}
+
+   var disp1 ="";   // Used to form weather icons and temperature
+   var disp2 ="";                           // Used to form times
+   var slot="";    //time slot value as string
+   var j = 1;
+   //time constructor in form 00:00
+   for (var i = 0; i < 6; i++) {
+      if (rtime<10){
+          slot = "0"+rtime+":00";
+      }
+      else {slot = rtime +":00";}
+      rtime += 3;
+      if (rtime>=24){
+          rtime=0;}
+
+       disp1 += "<div class='col-sm-2' style = 'width:120px'><img style = 'width:40px;height:32px' class='img' src='../static/images/weather-icons/" + weather + ".png'>"
+       //there is 1 less temperature than image
+       if (j<8){disp1+="<span class='temp' style ='font-size:8px'>  "+temp+"&#8451<\/span>"}
+       disp1+="<\/div>";
+       disp2 += "<div class='col-sm-2'  style = 'width:120px'>"+slot+"<\/div>";
 
 	<div class='Wbar' id='weatherbar'>
 		<div class='weathertitle'>
@@ -62,8 +114,8 @@
 	   }
 	   disp2 += "<div class='time'></div>"
 
-	   // Apply html to weather bar divs
-	   document.getElementById("uWrap").innerHTML = disp1;
-	   document.getElementById("lWrap").innerHTML = disp2;
+   // Apply html to weather bar divs
+   document.getElementById("uWrap").innerHTML = disp1;
+   document.getElementById("lWrap").innerHTML = disp2;
 
-	</script>
+</script>

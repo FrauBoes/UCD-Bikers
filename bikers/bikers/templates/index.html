@@ -7,7 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>UCD Bikers</title>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,166 +19,65 @@
 </head>
  
 <body>
-    <header>
-        <div class="wrapper">
-            <nav>
-                <a href="#">UCD Bikers</a>
-                <a href="https://www.google.ie/maps?hl=en" target="_blank">Google Maps</a>
-                <a href="https://openweathermap.org/" target="_blank">Open Weather</a>
-                <a href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a>
-                <div class="clear"></div>
-            </nav>
-        </div>    
-    </header>
-    
-    <div id="search-bar">
-        <div class="wrapper">
-            <form id="search-form" onsubmit="">
-
-            		<a class="current-location-button" href="">
-                		<img width="16" height="16" src="{{ url_for('static', filename='images/current-location.png') }}">
-            		</a>
-            		<input id='place_search' class="controls" placeholder="Search Box" type="text"  >
-            		<a class="search-button" href="">
-                		<img width="16" height="16" src="{{ url_for('static', filename='images/search-button.png') }}">
-            		</a>
-            		<div class="clear"></div>
-            </form>  
-        </div>
-    </div>
-    
-    
-    <div id="weather-bar">
-    	<div class="wrapper">
-        	{% include "weatherbar.html" %}
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">UCD_bikers</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Bikes map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Traffic map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Weather map</a>
+				</li>    
+			</ul>
+		</div> 
+		<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+			<div class="row" id="weatherbar" style ="float: right; width:45%">
+	        	{% include "weatherbar.html" %}
+			</div> 
+		</div>	,
+	</nav>
+<div class = "container-fluid" >
+	<form class="form-inline">
+		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
+	</form>
+</div>
+<div class ="container-fluid" style="height: 60vh" id="map"></div>
+<div class ="container-fluid">
+		<h4 class="text-uppercase font-weight-bold text-left">Top 3 stations near you </h4>
+		<hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px">
+		<div class = "row">
+			<div class = "station-worddetails col-md-4" style="min-height:320px"></div>
+			<div class = "station-worddetails col-md-4" style="min-height:320px"></div>
+			<div class = "station-worddetails col-md-4" style="min-height:320px"></div>
 		</div>
-    </div>
-  
-
-    <div id="occupancy-bar">
-    	<div class="wrapper">
-    	{% include "occupancy.html" %}
-    	</div>
-    </div>
-  
- <div id = "streetView1></div>
-    <div id="main-block">
-        <div class="wrapper">
-            <div id="station-list">
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-            	<div class = "station-list-wrapper">
-            		<div class= "station-worddetails">
-            			<h3>Top Station</h3>
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-            		</div>
-            	</div>
-
-      	<!--
-                <ul>
-<<<<<<< HEAD
-                    <li id="station-0">
-                        <h3>Top Station</h3>
-=======
-                    <li class="station-top">
-                        <h3 id="'top_station">Top Station</h3>
->>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-<<<<<<< HEAD
-                    <li id="station-1">
-                        <h3>Other Station</h3>
-=======
-                    <li class="station-other">
-                        <h3  id="second_station">Other Station</h3>
->>>>>>> fa9d5098801e2cfbd65c3f58b1b51bd85d15c802
-                        <p>Address and station number</p>
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-                    <li id="station-2">
-                        <h3>Other Station</h3>
-                        <p>Address and station number</p>     
-                        <ul>
-                            <li>Available Bikes</li>
-                            <li>Free Stands</li>
-                            <li>Capacity</li>
-                            <li>Credit card</li>
-                            <p></p>
-                        </ul>
-                    </li>
-
-                    <div class="clear"></div>
-                </ul>
--->
-            </div>
-            
-            <div id="map"></div>
+</div>
+<div class="container-fluid">
+	<div class = "col-sm-7"  id = "occupancy-bar">
+			{% include "occupancy.html" %}
+	</div>
+</div>
+<div class = "container-fluid" id="footer">
+	<div class= "row" style="padding-top:10px">
+        <div  class="col-sm-4" id="footer-links">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </div>
-    </div>
-    
-    <footer>
-        <div class="wrapper">
-                <div id="footer-links">
-                    <ul >
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <div class="clear"></div>
-                    </ul>
-                </div>
-
-                <div id="footer-info">
-                    <p>@2018 UCD Bikers. All rights reserved.</p>
-                </div>
+        <div class="col-sm-8" id="footer-info">
+            <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
         </div>
-    </footer>
+      </div>
+</div>
    {% include 'map.js' %}
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
