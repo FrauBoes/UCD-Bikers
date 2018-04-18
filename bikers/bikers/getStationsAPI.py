@@ -76,7 +76,8 @@ class station:
                "availible_bike": self.availible_bike,
                "bike_stands": self.bike_stands,
                "status": self.status,
-               "category": self.category}
+               "category": self.category,
+               "availible_space":int(self.bike_stands)-int(self.availible_bike)}
         return res
         
 
@@ -147,8 +148,13 @@ class  stationOperation:
         listJSON = []
         for key in sorted(self.distanceDictionary,key=self.distanceDictionary.get):
             sorted_key.append(key)
-        for key in sorted_key[0:3]:
-            listJSON.append(self.stationDictionary[key].getJSON()) 
+        number = 0
+        for key in sorted_key:
+            if self.stationDictionary[key].status == 'OPEN' and int(self.stationDictionary[key].availible_bike) != 0:
+                listJSON.append(self.stationDictionary[key].getJSON())
+                number=number +1 
+            if number == 3:
+                break
                    
         return listJSON
     

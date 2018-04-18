@@ -16,7 +16,7 @@
    //find what 3hr time slot it is
    
    if (hours>=0 && hours<3) {
-       rtime=0;}
+       rtime=0;} 
    else if (hours>=3 && hours<6) {
        rtime=3;}
    else if (hours>=6 && hours<9) {
@@ -46,11 +46,11 @@
       if (rtime>=24){
           rtime=0;}
 
-       disp1 += "<div class='col-sm-2' style = 'width:90px'><img class='img' src='../static/images/weather-icons/" + weather + ".png'>"
+       disp1 += "<div class='col-sm-2' style = 'width:120px'><img style = 'width:40px;height:32px' class='img' src='../static/images/weather-icons/" + weather + ".png'>"
        //there is 1 less temperature than image
        if (j<8){disp1+="<span class='temp' style ='font-size:8px'>  "+temp+"&#8451<\/span>"}
        disp1+="<\/div>";
-       disp2 += "<div class='col-sm-2'  style = 'width:90px'>"+slot+"<\/div>";
+       disp2 += "<div class='col-sm-2'  style = 'width:120px'>"+slot+"<\/div>";
 
        // Temperature needs to be converted from Kalvin
        temp = parseInt(obj[j].main.temp -273.15);

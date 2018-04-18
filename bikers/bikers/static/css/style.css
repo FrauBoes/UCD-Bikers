@@ -229,10 +229,6 @@ header {
 
 /* map styles */
 
-#map iframe {
-	height: 520px;
-	width: 720px;
-}
 
 /* footer styles */
 #footer {
@@ -279,12 +275,12 @@ header {
 	height:200px;
 }
 
-.card-header light card{
+/* .card-header light card{
 	height: 100px;}
 	
 .card-body{
 	height: 125px;
-}
+} */
 	
 h6{
     text-align:center;}
