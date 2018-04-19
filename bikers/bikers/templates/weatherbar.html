@@ -8,6 +8,7 @@
 
    // Initialise variables. Weather is icon id
    var weather = obj[0].weather[0].icon;
+
    // Temp needs to be converted from Kelvin
    var temp = parseInt(obj[0].main.temp -273.15);
    var time = new Date();
@@ -34,9 +35,9 @@
 
    var disp1 ="";   // Used to form weather icons and temperature
    var disp2 ="";   // Used to form times
-   var slot="";     //time slot value as string
+   var slot="";     // Time slot value as string
 
-   //time constructor in form hh:mm
+   // Time constructor in form hh:mm
    for (var i = 1; i < 7; i++) {
       if (rtime<10){
           slot = "0"+rtime+":00";
@@ -52,9 +53,9 @@
 
        disp2 += "<div class='col-sm-2'  style = 'width:120px'>"+slot+"</div>";
 
-	       // Temperature needs to be converted from Kelvin
-	       temp = parseInt(obj[i].main.temp -273.15);
-	       weather = obj[i].weather[0].icon;
+	   // Temperature needs to be converted from Kelvin
+	   temp = parseInt(obj[i].main.temp -273.15);
+	   weather = obj[i].weather[0].icon;
 
 	   }
 	   disp2 += "<div class='time'></div>"

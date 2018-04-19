@@ -1,3 +1,5 @@
+<!--Script to -->
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -7,11 +9,13 @@
 	var chart;
 	var options;
 	var data;
-	
+
+    // Create occupancy chart
 	function drawChart() {
 		var initlizeData = {{ data | safe }};
 		var data = google.visualization.arrayToDataTable(initlizeData);
-		
+
+		// Set chart options
 	  	options = {
 	    legend: {position: 'none'},
 	    animation:{
@@ -38,7 +42,7 @@
 
 		};
 	chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
-	
+
 	chart.draw(data, options);
 
 	}

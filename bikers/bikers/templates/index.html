@@ -1,94 +1,77 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
+	<link href="{{ url_for('static', filename='css/reset.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <title>UCD Bikers</title>
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js">
+	</script>
+	<title>UCD Bikers</title>
 </head>
- 
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="#">UCD Bikers</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		<a class="navbar-brand" href="#">UCD Bikers</a> <button class="navbar-toggler" data-target="#collapsibleNavbar" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="https://www.google.com/maps" target="_blank">Google Maps</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="https://openweathermap.org/" target="_blank">Openweather API</a>
-				</li>    
+				<li class="nav-item"><a class="nav-link" href="http://www.dublinbikes.ie/" target="_blank">Dublin Bikes</a></li>
+				<li class="nav-item"><a class="nav-link" href="https://www.google.com/maps" target="_blank">Google Maps</a></li>
+				<li class="nav-item"><a class="nav-link" href="https://openweathermap.org/" target="_blank">Openweather API</a></li>
 			</ul>
-		</div> 
+		</div>
 		<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-			<div class="row" id="weatherbar" style ="float: right; width:45%">
-	        	{% include "weatherbar.html" %}
-			</div> 
+			<div class="row" id="weatherbar" style="float: right; width:45%">
+				{% include "weatherbar.html" %}
+			</div>
 		</div>
 	</nav>
-	
-	<div class = "container-fluid" >
+	<div class="container-fluid">
 		<form class="form-inline">
-			<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
+			<input class="form-control" id="place_search" placeholder="Search" style="position: absoulte; left:0px; width:50%" type="text">
 		</form>
 	</div>
-	
-	<div class ="container-fluid" style="height: 60vh" id="map"></div>
-	
-	<div class ="container-fluid">
+	<div class="container-fluid" id="map" style="height: 60vh"></div>
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6">
-				<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
-				<div class = "row row-centered">
-					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+				<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you</h4>
+				<div class="row row-centered">
+					<div class="station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+					<div class="station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+					<div class="station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
-				<div class = "row"  id = "occupancy-bar">
+				<div class="row" id="occupancy-bar">
 					{% include "occupancy.html" %}
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<div class = "container-fluid" id="footer">
-		<div class= "row" style="padding-top:10px">
-		<div  class="col-sm-4" id="footer-links">
-		    <ul>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Terms of Service</a></li>
-			<li><a href="#">Privacy</a></li>
-			<li><a href="#">Contact</a></li>
-		    </ul>
+	<div class="container-fluid" id="footer">
+		<div class="row" style="padding-top:10px">
+			<div class="col-sm-4" id="footer-links">
+				<ul>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Terms of Service</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-8" id="footer-info">
+				<p style="text-align:left">@2018 UCD Bikers. All rights reserved.</p>
+			</div>
 		</div>
-		<div class="col-sm-8" id="footer-info">
-		    <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
-		</div>
-	      </div>
-	</div>
-	
-	{% include 'map.js' %}
-
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
+	</div>{% include 'map.js' %}
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">
 	</script>
-	
 </body>
-    
 </html>

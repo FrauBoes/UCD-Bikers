@@ -13,6 +13,8 @@ from . import getModel
 # Initialize the map instance
 mapInstance = getStationsAPI.stationOperation()
 
+
+# Function to load on first request
 @app.route('/')
 def index():    
     # Get station data and weather
@@ -27,7 +29,8 @@ def index():
 
     return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category, mapInfo = mapInfo)
 
-    
+
+# Refresh graph on clicked station
 @app.route('/getGraph')
 def occupancy_graph():
     # Get station selected
@@ -41,39 +44,20 @@ def occupancy_graph():
     
     return jsonify(data)
 
-@app.route('/getstations')
-def list_stations():
-    #Get the longitude and latitude of searched place
-    lat = float(request.args.get('lat'))
-    lng = float(request.args.get('lng'))
 
-    loc = (lat,lng)
-
-    #Need to see if every station in the list has bikes
-
-    M = mapStation.mapper()
-    nearestStats = M.findClosest(loc)
-
-    one = str(nearestStats[0])
-    two = str(nearestStats[1])
-    three = str(nearestStats[2])
-
-    return jsonify(nearestStats)
-
-
-
+# Center map on user location on first request
 @app.route('/mapCenter')
 def receive_location():
     latitude = request.args.get('lat')
     longitude = request.args.get('lng')
     mapInstance.updateMapCenter((latitude,longitude))
     return jsonify(mapInstance.getMapCenterJSON())
-    
+
+
+# Calculate list of nearest stations on given location
 @app.route('/list')
 def update_list():
     latitude = request.args.get('lat')
     longitude = request.args.get('lng')
     mapInstance.updateList((latitude,longitude))
     return jsonify(mapInstance.getListJSON())
-    
-    
