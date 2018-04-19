@@ -3,18 +3,20 @@
 	</div><!--Wrapper for times on the bottom-->
 	<div class='row float-right text-white' id='lWrap'></div>
 <script>
-   //construct object with weather data
+   // Construct object with weather data
    obj = {{ weather| safe }};
-   //initialise variables. weather is icon id
+
+   // Initialise variables. Weather is icon id
    var weather = obj[0].weather[0].icon;
+   // Temp needs to be converted from Kelvin
    var temp = parseInt(obj[0].main.temp -273.15);
    var time = new Date();
    var hours = time.getHours();
    var rtime;
-   //find what 3hr time slot it is
-   
+
+   // Find what 3hr time slot is now and assign to rtime
    if (hours>=0 && hours<3) {
-       rtime=0;} 
+       rtime=0;}
    else if (hours>=3 && hours<6) {
        rtime=3;}
    else if (hours>=6 && hours<9) {
@@ -31,11 +33,11 @@
        rtime=21;}
 
    var disp1 ="";   // Used to form weather icons and temperature
-   var disp2 ="";                           // Used to form times
-   var slot="";    //time slot value as string
-   var j = 1;
-   //time constructor in form 00:00
-   for (var i = 0; i < 6; i++) {
+   var disp2 ="";   // Used to form times
+   var slot="";     //time slot value as string
+
+   //time constructor in form hh:mm
+   for (var i = 1; i < 7; i++) {
       if (rtime<10){
           slot = "0"+rtime+":00";
       }
@@ -44,16 +46,16 @@
       if (rtime>=24){
           rtime=0;}
 
-       disp1 += "<div class='col-sm-2' style = 'width:120px'><img style = 'width:40px;height:32px' class='img' src='../static/images/weather-icons/" + weather + ".png'>"
-       //there is 1 less temperature than image
-       if (j<8){disp1+="<span class='temp' style ='font-size:12px'>  "+temp+"&#8451<\/span>"}
-       disp1+="<\/div>";
-       disp2 += "<div class='col-sm-2'  style = 'width:120px'>"+slot+"<\/div>";
+       disp1 += "<div class='col-sm-2' style = 'width:92px'><img style = 'width:40px;height:32px' class='img' src='../static/images/weather-icons/" + weather + ".png'>"
 
-	       // Temperature needs to be converted from Kalvin
-	       temp = parseInt(obj[j].main.temp -273.15);
-	       weather = obj[j].weather[0].icon;
-	       j++;
+       disp1 += "<span style ='font-size:12px'>  "+temp+"&#8451</span></div>";
+
+       disp2 += "<div class='col-sm-2'  style = 'width:120px'>"+slot+"</div>";
+
+	       // Temperature needs to be converted from Kelvin
+	       temp = parseInt(obj[i].main.temp -273.15);
+	       weather = obj[i].weather[0].icon;
+
 	   }
 	   disp2 += "<div class='time'></div>"
 

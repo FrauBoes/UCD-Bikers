@@ -74,14 +74,9 @@ nav a {
 	font-size: 20px;
 	padding: 3%;
 }
-<<<<<<< HEAD
-
 .navbar-brand{
  font-size: 24px;
  }
-
-=======
->>>>>>> a6ff2a447116f23b12125b5e9ef9c63825a215f2
 /* header styles */
 
 header {
@@ -156,8 +151,7 @@ header {
 	float: left;
 	bottom: 0px;
 	height: 100%;
-	width: 12.4%;
-	/*    border: solid 1px black;*/
+	width: 16.5%;
 	font-size: 15px;
 	text-align: center;
 }
@@ -165,7 +159,7 @@ header {
 
 .icon {
 	float: left;
-	width: 12.5%;
+	width: 16.5%;
 	vertical-align: top;
 }
 /* temperature div*/
