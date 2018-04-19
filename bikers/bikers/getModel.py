@@ -1,3 +1,8 @@
+# This was code to use SQL alchemy for database connecttion.
+# We dicided not to use this due to implementation challenges with the given time restraints
+
+
+
 # from flask import Flask, render_template, request, jsonify, g
 # from flask_sqlalchemy import SQLAlchemy
 # import pymysql
