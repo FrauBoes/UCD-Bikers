@@ -8,16 +8,6 @@ Web application for Dublin Bikes with latest updates and past occupancy trends.
 (Photograph: Aidan Crawley/Bloomberg)
 
 
-## Quick Start
-
-Run the application:
-
-    make run
-
-And open it in the browser at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
-
-
-
 ## Prerequisites
 
 The application is built to be used with Python 3. Update `Makefile` to switch to Python 2 if needed.
@@ -26,7 +16,18 @@ Some Flask dependencies are compiled during installation, so `gcc` and Python he
 For example, on Ubuntu:
 
     apt install build-essential python3-dev
+    pip install virtualenv
 
+
+## Quick Start
+
+        git clone https://github.com/FrauBoes/UCD-Bikers.git
+        
+Go to UCD-Bikers/bikers. To run the application from the terminal:
+
+    make run
+
+And open it in the browser at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 
 
 ## Development environment and release process
@@ -51,10 +52,6 @@ For example, on Ubuntu:
 
 
 ## Deployment
-
-
-    git clone https://github.com/FrauBoes/UCD-Bikers.git
-
 
 Check out [Deploying with Fabric](http://flask.pocoo.org/docs/0.12/patterns/fabric/#fabric-deployment) on one of the
 possible ways to automate the deployment.
@@ -98,10 +95,3 @@ And, most likely, it will also run behind a [reverse proxy](http://flask.pocoo.o
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
