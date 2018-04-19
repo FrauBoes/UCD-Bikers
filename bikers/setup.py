@@ -8,5 +8,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'flask','pymysql','pytest','geopy'],
+        'flask','pymysql','pytest','geopy','pandas','statsmodels'],
 )

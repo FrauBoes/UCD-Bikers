@@ -9,8 +9,8 @@
 	google.charts.setOnLoadCallback(drawChart);
 	
 	var chart;
-	var options;
 	var data;
+	var options
 	
 	function drawChart() {
 		var initlizeData = {{ data | safe }};
@@ -21,6 +21,7 @@
 	  	options = {
 	    legend: {position: 'none'},
 	    //curveType: 'function',
+	    height:300,
 	    animation:{
         duration: 1000,
         easing: 'out',

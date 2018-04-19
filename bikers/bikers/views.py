@@ -9,6 +9,7 @@ from . import mapStation
 from flask.json import jsonify
 from . import getModel
 from . import mapStation
+from . import getBikesGraph
 
 
 
@@ -28,8 +29,9 @@ def index():
     # Get weekday and data
     weekday = datetime.datetime.today().weekday() + 2
     data = getOccupancy.convert_data(getOccupancy.get_station_occupancy(weekday, 8)) # default station 8 Saint Stephen's Green
-
-    return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category, mapInfo = mapInfo)
+    predictiondata = getBikesGraph.getModelData(8,mapInstance.stationDictionary[8].bike_stands)
+    
+    return render_template('index.html',locations=locations,number=number,bike_stands=bike_stands,available_bikes=available_bikes,weather=weather, weekday=weekday, data=data, category=category,predictiondata=predictiondata,mapInfo = mapInfo)
 
     
 @app.route('/getGraph')
@@ -79,5 +81,16 @@ def update_list():
     longitude = request.args.get('lng')
     mapInstance.updateList((latitude,longitude))
     return jsonify(mapInstance.getListJSON())
+
+@app.route('/getModel')
+def bike_model():
+    # Get station selected
+    number = int(request.args.get('num'))
     
+    # Get current weekday  
+    
+    # Get past occupancy data based on station and weekday    
+    data = getBikesGraph.getModelData(number,mapInstance.stationDictionary[number].bike_stands)
+    
+    return jsonify(data)
     

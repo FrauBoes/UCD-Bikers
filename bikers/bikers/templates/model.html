@@ -1,0 +1,71 @@
+<!-- <h2>
+ 	{{ weekday | safe }}
+</h2> -->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	
+	var chartModel;
+	var data;
+	var optionsModel;
+	
+	function drawChart() {
+		var initlizeData = {{ predictiondata | safe }};
+		var data = google.visualization.arrayToDataTable(initlizeData);
+		
+		//console.log(initlizeData)
+	
+	  	optionsModel = {
+	    legend: {position: 'none'},
+	    //curveType: 'function',
+        height:300,
+	    animation:{
+        duration: 1000,
+        easing: 'out',
+        },
+        'tooltip' : {
+            trigger: 'none'
+            },
+
+	    hAxis: { ticks: [{v:6.0, f:'06:00'},{v:8.0, f:'08:00'},{v:10.0, f:'10:00'},{v:12.0, f:'12:00'},{v:14.0, f:'14:00'},{v:16.0, f:'16:00'},{v:18.0, f:'18:00'},{v:20.0, f:'20:00'},{v:22.0, f:'22:00'},{v:24.0, f:'24:00'}],
+                viewWindow: { min: 5, max: 24},
+                gridlines: { color: 'transparent'},
+
+	    },
+
+        vAxis :{
+            viewWindow: {   min: 0,     max: 1},
+
+            ticks: [{v:100, f:'100%'}]
+            },
+
+           bar: { groupWidth: '98%'  }
+
+		};
+	chartModel = new google.visualization.ColumnChart(document.getElementById('bike_chart'));
+	
+	chartModel.draw(data, optionsModel);
+
+	}
+	
+
+// 	function resizeChart () {
+//  	    chart.draw(data, options);
+// 	}
+// 	
+// 	if (document.addEventListener) {
+// 	    window.addEventListener('resize', resizeChart;
+// 	}
+// 	else if (document.attachEvent) {
+// 	    window.attachEvent('onresize', resizeChart());
+// 	}
+// 	else {
+// 	    window.resize = resizeChart;
+// 	}
+
+
+</script>
+<div id="bike_chart" style="width: 100%; height: 100%"></div> 

@@ -50,24 +50,26 @@
 </div>
 <div class ="container-fluid" style="height: 60vh" id="map"></div>
 <div class ="container-fluid">
-	<div class="row">
-		<div class="col-sm-6">
-			<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
-			<div class = "row row-centered">
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-			</div>
+		<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
+		<div class = "row row-centered">
+			<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+			<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+			<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
 		</div>
-		<div class="col-sm-6">
-			<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
-			<div class = "row"  id = "occupancy-bar">
-				{% include "occupancy.html" %}
-			</div>
-		</div>
-	</div>
 </div>
 
+<div class = "container-fluid">
+	<div class="row">
+		<div class = "col-sm-6" id = "occupancy-bar">
+		<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
+				{% include "occupancy.html" %}
+		</div>
+		<div class = "col-sm-6" id="bikechart-bar">
+		<h4 class="text-uppercase font-weight-bold text-center">The next 20 hours</h4>
+				{% include "model.html" %}
+		</div>
+	</div>
+<div>
 <div class = "container-fluid" id="footer">
 	<div class= "row" style="padding-top:10px">
         <div  class="col-sm-4" id="footer-links">

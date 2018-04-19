@@ -30,7 +30,7 @@ function initMap(){
 		
 	   /* Mark all the station Marker */
 	   	  
-	  // load all images
+	  // load all images which mark the different color
 	  var imagepath =["{{ url_for('static', filename='images/C0.png') }}","{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}","{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"];
 	
 	  var numArray = Object.keys(mapInfo);
@@ -58,6 +58,7 @@ function initMap(){
 		
 		google.maps.event.addListener(marker, "click", function(){
 			setGraph(marker.customInfo);
+			setModel(marker.customInfo);
 			setList(marker.position.lat(),marker.position.lng());
 			//getPano(marker);
 			clickedMarker = marker;
@@ -198,6 +199,15 @@ function initMap(){
 	 	    chart.draw(graphdata, options);
 	 	    });	
 	};
+	
+   function setModel(number){
+	 	var url = "getModel?num="+number;
+	 	$.getJSON(url, function(data){
+	 		var graphdata = google.visualization.arrayToDataTable(data);
+	 	    chartModel.draw(graphdata, optionsModel);
+	 	    });	
+	};
+
 
 
 

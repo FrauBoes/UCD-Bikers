@@ -167,7 +167,8 @@ class  stationOperation:
         
 if __name__=="__main__":
     
-    mapInstance = stationOperation(bikesInfo)
+    mapInstance = stationOperation()
+    print(mapInstance.stationDictionary[34].bike_stands)
     print(mapInstance.getListJSON())
     print(mapInstance.getStationAndMapCenterJSON())
     mapInstance.updateMapCenter((52.2439118,-6.2658777))
