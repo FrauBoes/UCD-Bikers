@@ -13,9 +13,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <title>UCD Bikers</title>
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
  
 <body>
@@ -41,52 +38,57 @@
 			<div class="row" id="weatherbar" style ="float: right; width:45%">
 	        	{% include "weatherbar.html" %}
 			</div> 
-		</div>	,
-	</nav>
-<div class = "container-fluid" >
-	<form class="form-inline">
-		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
-	</form>
-</div>
-<div class ="container-fluid" style="height: 60vh" id="map"></div>
-<div class ="container-fluid">
-	<div class="row">
-		<div class="col-sm-6">
-			<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
-			<div class = "row row-centered">
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-				<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
-			</div>
 		</div>
-		<div class="col-sm-6">
-			<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
-			<div class = "row"  id = "occupancy-bar">
-				{% include "occupancy.html" %}
+	</nav>
+	
+	<div class = "container-fluid" >
+		<form class="form-inline">
+			<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
+		</form>
+	</div>
+	
+	<div class ="container-fluid" style="height: 60vh" id="map"></div>
+	
+	<div class ="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
+				<div class = "row row-centered">
+					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+					<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px"></div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
+				<div class = "row"  id = "occupancy-bar">
+					{% include "occupancy.html" %}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class = "container-fluid" id="footer">
-	<div class= "row" style="padding-top:10px">
-        <div  class="col-sm-4" id="footer-links">
-            <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-8" id="footer-info">
-            <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
-        </div>
-      </div>
-</div>
-   {% include 'map.js' %}
+	<div class = "container-fluid" id="footer">
+		<div class= "row" style="padding-top:10px">
+		<div  class="col-sm-4" id="footer-links">
+		    <ul>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Terms of Service</a></li>
+			<li><a href="#">Privacy</a></li>
+			<li><a href="#">Contact</a></li>
+		    </ul>
+		</div>
+		<div class="col-sm-8" id="footer-info">
+		    <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
+		</div>
+	      </div>
+	</div>
+	
+	{% include 'map.js' %}
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
-    </script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
+	</script>
+	
 </body>
     
 </html>
