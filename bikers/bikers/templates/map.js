@@ -1,24 +1,22 @@
-<script> 
-// script to draw circle on the screen
-
+<script>
+// Script so set up the map with station markers
 function initMap(){
 
-      /*first operation: initlize the map staion and center */
+      // Iitialise the map station and center
       var mapInfo = {{ mapInfo | safe }};
-      
-      console.log(mapInfo);
-      
-      // user's default location
+
+
+      // User's default location
 	  var cord = mapInfo.centerCord;
-	  
+
 	  console.log(cord);
-	
-	  // init map instance
+
+	  // Initialise map
 	  var map=new google.maps.Map(document.getElementById('map'),{
 		zoom:14,
 		center:cord});
-		
-	  // Mark the user location with marker first.
+
+	  // Mark the user location with marker first
 	  var userMarker = new google.maps.Marker({
 			position: cord,
 			customInfo: "2",
@@ -32,20 +30,18 @@ function initMap(){
 	   	  
 	  // load all images which mark the different color
 	  var imagepath =["{{ url_for('static', filename='images/C0.png') }}","{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}","{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"];
-	
+
 	  var numArray = Object.keys(mapInfo);
-	  
+
 	  console.log(numArray)
-	  
-	  var infowindow = new google.maps.InfoWindow(); 
-	
+
+	  var infowindow = new google.maps.InfoWindow();
+
 	  var markers = numArray.map(function(numStation, i){
-	  
-	    // before click, the info window  is empty
-	    // var locationInfoWindow = new google.maps.InfoWindow(); 
-		
+
+        // Fetch all station coordinates
 		var stationCord ={lat:mapInfo[numStation].lat,lng:mapInfo[numStation].lng};
-		
+
 		var marker = new google.maps.Marker({
 			position: stationCord,
 			customInfo: numStation,
@@ -53,9 +49,9 @@ function initMap(){
 			url: imagepath[mapInfo[numStation].category],
 			scaledSize: new google.maps.Size(64, 64)},
 			map: map,
-			//infowindow:locationInfoWindow
 		});
-		
+
+		// Reset map information based on the station that is clicked
 		google.maps.event.addListener(marker, "click", function(){
 			setGraph(marker.customInfo);
 			setModel(marker.customInfo);
@@ -65,11 +61,11 @@ function initMap(){
     		sv.getPanoramaByLocation(marker.getPosition(), 50, processSVData);
 				//getPano(marker);
 			});
-			
+
 		return marker
 	 });
-	 
-	 // the content in the infowindow
+
+	// Create info window for each station
 	var container = document.createElement("DIV");
 	container.className = "container";
 	container.style.width = "500px";
@@ -85,15 +81,15 @@ function initMap(){
 	var htmlContent = document.createElement("DIV");
 	htmlContent.className ="col-sm-6";
 	content.appendChild(htmlContent);
-	
+
 	// Create the infowindow instance
-	var infowindow = new google.maps.InfoWindow({content:content}); 
-	 
+	var infowindow = new google.maps.InfoWindow({content:content});
+
 	var sv = new google.maps.StreetViewService();
 	var clickedMarker = null;
 	var pano = null;
 	var pin = new google.maps.MVCObject();
-     
+
    google.maps.event.addListenerOnce(infowindow, "domready", function(){
 		pano = new google.maps.StreetViewPanorama(streetview, {
 		    navigationControl: false,
@@ -104,8 +100,8 @@ function initMap(){
   		});
 		pano.bindTo("Position",pin);
    	});
-     
-     
+
+  // Function to include street view wheel in window
   function processSVData(data, status) {
   if (status == google.maps.StreetViewStatus.OK) {
     var marker = clickedMarker;
@@ -139,32 +135,30 @@ function initMap(){
     title.innerHTML = clickedMarker.getTitle() + "<br>Street View data not found for this location";
     htmlContent.innerHTML = clickedMarker.myHtml;
     pano.setVisible(false);
-    // alert("Street View data not found for this location.");
   }
 }
 
 
-
+    // Function to open the window when a station is clicked
 	function openInfoWindow(marker) {
  		htmlContent.innerHTML = generateInfoWindow(mapInfo[marker.customInfo]);
  		pin.set("position", marker.getPosition());
  		infowindow.open(map, marker);
-		}	
-	
-	
+		}
+
+	// Get user's location
 	getLocation();
 
-   /* functions which get user's location and reset the map center */
-	//If user's location between default location is greater than 2km, still use the default location 
+    // Center map at user location
+	// If user's location from default location is greater than 2km, still use the default location
 	function getLocation(){
 		if(navigator.geolocation){
 			navigator.geolocation.getCurrentPosition(setUserMarker);
 		}
 	};
-	
-	function setUserMarker(position){ 
-		//mark uers' locaiton with a marker
-		//map.setCenter ({lat:position.coords.latitude, lng:position.coords.longitude });
+
+	function setUserMarker(position){
+		// Mark user's location
 		var cord = {lat:position.coords.latitude, lng:position.coords.longitude };
 		userMarker.setPosition(cord);
 		var lat = position.coords.latitude;
@@ -173,31 +167,33 @@ function initMap(){
 		setList(lat,lng);
 	};
 
-	
+	// Function that sets map centre based on coordinates
 	function setMapCenter(lat,lng){
 		var url = "mapCenter?lat="+lat+"&lng="+lng;
 		$.getJSON(url, function(data){
 			console.log(data);
-			map.setCenter(data.centerCord);			
+			map.setCenter(data.centerCord);
 		})
 	};
-	
+
+	// Calls function to find nearest 3 stations to coordinates
 	function setList(lat,lng){
 		var url = "list?lat="+lat+"&lng="+lng;
 		$.getJSON(url, function(data){
 			var i;
 	 		for (i= 0; i<data.length;i++){
 	 			document.getElementsByClassName("station-worddetails")[i].innerHTML = generateContent(data[i],i);
-	 		}	
+	 		}
 		})
 	};
-	
+
+	// Refresh graph on event (load, resize or click)
     function setGraph(number){
 	 	var url = "getGraph?num="+number;
 	 	$.getJSON(url, function(data){
 	 		var graphdata = google.visualization.arrayToDataTable(data);
 	 	    chart.draw(graphdata, options);
-	 	    });	
+	 	    });
 	};
 	
    function setModel(number){
@@ -210,10 +206,6 @@ function initMap(){
 
 
 
-
-
-//	##################################################################################################
-
 // Create the search box and link it to the UI element.
         var input = document.getElementById('place_search');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -224,7 +216,7 @@ function initMap(){
           searchBox.setBounds(map.getBounds());
         });
 
-
+// Process input from search box
 searchBox.addListener('places_changed', function() {
           var places = searchBox.getPlaces();
 
@@ -271,7 +263,7 @@ searchBox.addListener('places_changed', function() {
             var searchLon = place.geometry.location.lng();
 
             setList(searchLat, searchLon);
-            
+
      });
              map.fitBounds(bounds);
 // Adapted from https://developers.google.com/maps/documentation/javascript/examples/places-searchbox
@@ -279,11 +271,11 @@ searchBox.addListener('places_changed', function() {
 
         });
 
-  
+
   var infoMark = false;}
 
- 
- 
+
+ // Generate HTML for suggested stations
 function generateContent(respon,i){
 	var rankImage=["{{ url_for('static', filename='images/card_icons/1.png') }}","{{ url_for('static', filename='images/card_icons/2.png') }}","{{ url_for('static', filename='images/card_icons/3.png') }}"]
  	str = '<div class = "card"><div class="card-header light card" ><img src="'+rankImage[i]+'" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="40" height="40"></div>'
@@ -295,42 +287,23 @@ function generateContent(respon,i){
  	str += '<p>'+ respon.availible_bike + '</p></div>';
  	str += '<div class="col-sm-4"><img  class = "mx-auto d-block" src ='+"{{ url_for('static', filename='images/card_icons/space.png') }}"+' width="20" height="20">'
  	str += '<p>'+ respon.availible_space + '</p></div></div></div></div>';
- 	
+
  	return str;
- 	
+
  }
- 
+
+ // Generate HTML for station info window
  function generateInfoWindow(respon){
  	str = '<h5> Station NO. '+respon.number.toString()+'</h5>'
  	str += '<h6>'+respon.name+ '</h6>';
- 	str += '<p style ="text-align:left"> Status: '+ respon.status + '</p>'; 
+ 	str += '<p style ="text-align:left"> Status: '+ respon.status + '</p>';
  	str += '<p style ="text-align:left"> Availible Bikes: '+ respon.availible_bike + '</p>';
  	str += '<p style ="text-align:left"> Bike Stands: '+ respon.bike_stands+ '</p>';
  	str += '<p style ="text-align:left"> Avalible Space: '+respon.availible_space+ '</p>';
  	return str;
 
  }
- 
- 
-
-//function change color from red to blue
-function changeColor(num,totalNum){
-	var r,b;
-	r = Math.round(255*(totalNum-num)/totalNum);
-	b = Math.round(255*num/totalNum);
-	color = "rgb("+r+",0,"+b+")";
-	return color
-}
-
-	
 
 
-/* The following  content is about all the function related to infowindows shown on the map */
-// 
-// function hideAllInfoWindow(markers,map){
-// 	markers.forEach(function(marker){
-// 		marker.infowindow.close(map,marker);
-// 	})};
-// 	
 
 </script>

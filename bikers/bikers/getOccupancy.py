@@ -1,3 +1,6 @@
+# Script to fetch the data for the occupancy chart
+# Based on weekday and selected station
+
 import json
 import pymysql
 from flask import jsonify
@@ -5,14 +8,15 @@ from builtins import list
 from datetime import datetime
 from collections import OrderedDict
 
+# API access details
 host ="bikedata.c33719womxye.us-east-2.rds.amazonaws.com"
 port = 3306
 dbname="BikeData"
 user = "aws137482dd"
 password="bikerz123"
+
     
-    
-# returns a tuple of tuples with all rows of occupancy and timestamp for a given station and weekday (1=Sunday, 7=Saturday)
+# Returns a tuple of tuples with all rows of occupancy and timestamp for a given station and weekday (1=Sunday, 7=Saturday)
 def get_station_occupancy(weekday,number):
     conn = pymysql.connect(host, user=user, port=port, passwd=password,db=dbname)
     cursor = conn.cursor()
@@ -23,26 +27,26 @@ def get_station_occupancy(weekday,number):
     return data
 
 
-# returns occupancy data as array of arrays [time, degree of availability]
+# Returns occupancy data as array of arrays [time, degree of availability]
 def convert_data(data):
     occupancy_array = [['Time of the day', 'Degree of availability']]
 
-    d = {}  # dictionary to store and aggregate entries based on time bin
+    d = {}  # Dictionary to store and aggregate entries based on time bin
     
     for entry in data:
 
         hour, minute = get_hour(entry[0]), get_minute(entry[0])
-        time = hour + (minute*0.5)+0.25  # time in format hh.m (2 bins)
+        time = hour + (minute*0.5)+0.25  # time in format hh.m (1/2 hour bins)
 
-        avail = int((entry[1]/entry[2])*100)  # number of bikes / number of stands
+        avail = int((entry[1]/entry[2])*100)  # Number of bikes / number of stands
 
-        # get average of availability per time bin
+        # Get average of availability per time bin for multiple entries
         if time in d:
             d[time] = (d[time] + avail) / 2
         else:
             d[time] = avail
 
-    # sort entries in dictionary to get chronologically sorted time bins
+    # Sort entries in dictionary to get chronologically sorted time bins
     d = OrderedDict(sorted(d.items()))
     
     for pair in d:
@@ -54,18 +58,14 @@ def convert_data(data):
     return occupancy_array
 
 
-# returns a tuple with hour (0-23) and minute frame (0-5)
+# Returns the hour
 def get_hour(timesstamp):
     hour = int(datetime.fromtimestamp(timesstamp / 1000).strftime('%H'))
     return hour
 
 
-# returns a tuple with hour (0-23) and minute frame (0-5)
+# Returns the minutes rounded to half hour (it takes the decimal value when multiplied by 0.5 above)
 def get_minute(timesstamp):
     #minute = round((int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M') // 10), 1)
     minute = round(int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) / 60, 0)
     return minute
-
- 
-# if __name__=="__main__":
-#     print(get_station_occupancy(4, 10))
