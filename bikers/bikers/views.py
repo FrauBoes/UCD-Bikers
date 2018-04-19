@@ -1,24 +1,20 @@
+# Script to run all the vital components of the app
+
 import datetime
 from flask import Flask, render_template, request, jsonify
 from bikers import app
 from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
-from . import mapStation
-
 from flask.json import jsonify
 from . import getModel
-from . import mapStation
 
 
-
-# initialize the stationOperaation which includes all the function
+# Initialize the map instance
 mapInstance = getStationsAPI.stationOperation()
 
 @app.route('/')
-def index():
-    app.logger.warning('sample message')
-    
+def index():    
     # Get station data and weather
     locations,number,bike_stands,available_bikes,category= getStationsAPI.initStations()
     weather = getWeatherAPI.getWeather()
