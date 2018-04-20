@@ -10,7 +10,6 @@ function initMap(){
       // User's default location
 	  var cord = mapInfo.centerCord;
 
-	  console.log(cord);
 
 	  // Initialise map
 	  var map=new google.maps.Map(document.getElementById('map'),{
@@ -33,8 +32,6 @@ function initMap(){
 	  var imagepath =["{{ url_for('static', filename='images/C0.png') }}","{{ url_for('static', filename='images/C1.png') }}","{{ url_for('static', filename='images/C2.png') }}","{{ url_for('static', filename='images/C3.png') }}","{{ url_for('static', filename='images/close.png') }}"];
 
 	  var numArray = Object.keys(mapInfo);
-
-	  console.log(numArray)
 
 	  var infowindow = new google.maps.InfoWindow();
 
@@ -172,7 +169,6 @@ function initMap(){
 	function setMapCenter(lat,lng){
 		var url = "mapCenter?lat="+lat+"&lng="+lng;
 		$.getJSON(url, function(data){
-			console.log(data);
 			map.setCenter(data.centerCord);
 		})
 	};
@@ -192,7 +188,6 @@ function initMap(){
     function setGraph(number){
 	 	var url = "getGraph?num="+number;
 	 	$.getJSON(url, function(data){
-	 	console.log(data);
 	 		var graphdata = google.visualization.arrayToDataTable(data);
 	 	    chart.draw(graphdata, options);
 	 	    });
@@ -201,7 +196,6 @@ function initMap(){
    function setModel(number){
 	 	var url = "getModel?num="+number;
 	 	$.getJSON(url, function(data){
-	 	console.log(data);
 	 		var graphdata = google.visualization.arrayToDataTable(data);
 	 	    chartModel.draw(graphdata, optionsModel);
 	 	    });	
