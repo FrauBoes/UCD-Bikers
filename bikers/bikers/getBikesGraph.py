@@ -1,3 +1,6 @@
+# Script to fetch the data for the prediction chart based on model
+# Based on selected station
+
 import urllib.request,urllib.parse,json
 import statsmodels.api as smapi
 import datetime
@@ -6,8 +9,12 @@ import pandas as pd
 from pandas import DataFrame
 import os
 
-# get right now time
+
 def getModelData(num, Maximum):
+    """
+    Get latest model prediction for selected station
+    Return 2-dimensional list of time and percentage of available bikes
+    """
 
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))+'/static/pre_model/'
     
@@ -40,7 +47,9 @@ def getModelData(num, Maximum):
                     "weather_temperature": temp,
                     "STATION_NUMBER": num,
                    },ignore_index=True)
+    
     res= [["Time","Degree of availablilty"]]
+    
     for i in range(24):
             model_name = THIS_FOLDER + str(i+inittime)
             
@@ -59,6 +68,4 @@ def getModelData(num, Maximum):
             
             res.append(pre)
             
-            
-
     return res

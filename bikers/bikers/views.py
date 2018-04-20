@@ -1,4 +1,4 @@
-# Script to run all the vital components of the app
+# Script to run the app
 
 import datetime
 from flask import Flask, render_template, request, jsonify
@@ -7,11 +7,7 @@ from . import getStationsAPI
 from . import getWeatherAPI
 from . import getOccupancy
 from flask.json import jsonify
-from . import getModel
-#from . import mapStation
 from . import getBikesGraph
-
-
 
 
 # Initialize the map instance
@@ -72,8 +68,6 @@ def update_list():
 def bike_model():
     # Get station selected
     number = int(request.args.get('num'))
-    
-    # Get current weekday  
     
     # Get past occupancy data based on station and weekday    
     data = getBikesGraph.getModelData(number,mapInstance.stationDictionary[number].bike_stands)

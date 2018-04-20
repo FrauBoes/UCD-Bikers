@@ -66,6 +66,5 @@ def get_hour(timesstamp):
 
 # Returns the minutes rounded to half hour (it takes the decimal value when multiplied by 0.5 above)
 def get_minute(timesstamp):
-    #minute = round((int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M') // 10), 1)
     minute = round(int(datetime.fromtimestamp(timesstamp / 1000).strftime('%M')) / 60, 0)
     return minute

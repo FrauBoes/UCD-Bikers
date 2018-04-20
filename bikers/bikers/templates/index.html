@@ -1,5 +1,9 @@
+<!--Main template-->
+
 <!DOCTYPE html>
+
 <html lang="en">
+    
 <head>
 	<meta charset="utf-8" content="text/html" http-equiv="Content-Type">
 	<link href="{{ url_for('static', filename='css/reset.css') }}" rel="stylesheet" type="text/css">
@@ -7,7 +11,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 	</script>
-	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js">
@@ -16,7 +19,9 @@
 	</script>
 	<title>UCD Bikers</title>
 </head>
+    
 <body>
+    
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 		<a class="navbar-brand" href="#">UCD Bikers</a> <button class="navbar-toggler" data-target="#collapsibleNavbar" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -27,136 +32,137 @@
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-			<div class="row" id="weatherbar" style ="float: right; width:45%">
+			<div class="row" id="weatherbar" style ="float: right; width:60%">
 	        	{% include "weatherbar.html" %}
 			</div> 
-		</div>	,
+		</div>
 	</nav>
-<div class = "container-fluid" >
-	<form class="form-inline">
-		<input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
-	</form>
-</div>
-<div class ="container-fluid" style="height: 60vh" id="map"></div>
+    
+    <div class = "container-fluid" >
+        <form class="form-inline">
+            <input class="form-control" type="text" placeholder="Search"  style ="position: absoulte; left:0px; width:50%" id="place_search">
+        </form>
+    </div>
+    <div class ="container-fluid" style="height: 60vh" id="map"></div>
 
-<div class ="container" id="list">
-		<h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
-		<div class = "row ">
-			<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
-				<div class="card-block">
-					<div class="card-header">
-						<img src="{{ url_for('static', filename='images/card_icons/1.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
-					</div>
-					<div calss ="card-title">
-				       <h6 class = "title"></h6>
-				       <h5 class = "subtitle"></h5>
-				    </div>
-				    <div class ="card-body">
-				    	<div class= "row">
-				    		<div class="col-4 text-danger">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
-				    			<p class ="status"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
-				    			<p class ="bikes"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
-				    			<p class="spaces"></p>
-				    		</div>
-				    	</div>
-				    </div>
-				</div>	
-			</div>
-		<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
-				<div class="card-block">
-					<div class="card-header">
-						<img src="{{ url_for('static', filename='images/card_icons/2.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
-					</div>
-					<div calss ="card-title">
-				       <h6 class = "title"></h6>
-				       <h5 class = "subtitle"></h5>
-				    </div>
-				    <div class ="card-body">
-				    	<div class= "row">
-				    		<div class="col-4 text-danger">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
-				    			<p class ="status"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
-				    			<p class ="bikes"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
-				    			<p class="spaces"></p>
-				    		</div>
-				    	</div>
-				    </div>
-				</div>
-			</div>
-			<div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
-				<div class="card-block">
-					<div class="card-header">
-						<img src="{{ url_for('static', filename='images/card_icons/3.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
-					</div>
-					<div calss ="card-title">
-				       <h6 class = "title"></h6>
-				       <h5 class = "subtitle"></h5>
-				    </div>
-				    <div class ="card-body">
-				    	<div class= "row">
-				    		<div class="col-4 text-danger">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
-				    			<p class ="status"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
-				    			<p class ="bikes"></p>
-				    		</div>
-				    		<div class="col-4">
-				    			<img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
-				    			<p class="spaces"></p>
-				    		</div>
-				    	</div>
-				    </div>	
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class = "container-fluid" id="graph">
-	<div class="row">
-		<div class = "col-sm-6" id = "occupancy-bar">
-		<h4 class="text-uppercase font-weight-bold text-center">Occupancy at selected station</h4>
-				{% include "occupancy.html" %}
-		</div>
-		<div class = "col-sm-6" id="bikechart-bar">
-		<h4 class="text-uppercase font-weight-bold text-center">The next 20 hours</h4>
-				{% include "model.html" %}
-		</div>
-	</div>
-</div>
-<div class = "container-fluid" id="footer">
-	<div class= "row" style="padding-top:10px">
-        <div  class="col-sm-4" id="footer-links">
-            <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+    <div class ="container" id="list">
+            <h4 class="text-uppercase font-weight-bold text-center">Top 3 stations near you </h4>
+            <div class = "row ">
+                <div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
+                    <div class="card-block">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='images/card_icons/1.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
+                        </div>
+                        <div calss ="card-title">
+                           <h6 class = "title"></h6>
+                           <h5 class = "subtitle"></h5>
+                        </div>
+                        <div class ="card-body">
+                            <div class= "row">
+                                <div class="col-4 text-danger">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
+                                    <p class ="status"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
+                                    <p class ="bikes"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
+                                    <p class="spaces"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                </div>
+                
+                <div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
+                    <div class="card-block">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='images/card_icons/2.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
+                        </div>
+                        <div calss ="card-title">
+                           <h6 class = "title"></h6>
+                           <h5 class = "subtitle"></h5>
+                        </div>
+                        <div class ="card-body">
+                            <div class= "row">
+                                <div class="col-4 text-danger">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
+                                    <p class ="status"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
+                                    <p class ="bikes"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
+                                    <p class="spaces"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class = "station-worddetails col-md-4 col-centered" style="min-height:200px">
+                    <div class="card-block">
+                        <div class="card-header">
+                            <img src="{{ url_for('static', filename='images/card_icons/3.png') }}" class="rounded-circle mx-auto d-block" alt="Cinque Tere" width="80" height="80">
+                        </div>
+                        <div calss ="card-title">
+                           <h6 class = "title"></h6>
+                           <h5 class = "subtitle"></h5>
+                        </div>
+                        <div class ="card-body">
+                            <div class= "row">
+                                <div class="col-4 text-danger">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/status.png') }}" width="20" height="20">
+                                    <p class ="status"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/bike.png') }}" width="20" height="20">
+                                    <p class ="bikes"></p>
+                                </div>
+                                <div class="col-4">
+                                    <img class = "mx-auto d-block" src ="{{ url_for('static', filename='images/card_icons/space.png') }}" width="20" height="20">
+                                    <p class="spaces"></p>
+                                </div>
+                            </div>
+                        </div>	
+                    </div>
+                </div>
         </div>
-        <div class="col-sm-8" id="footer-info">
-            <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
-        </div>
-      </div>
-</div>
-   {% include 'map.js' %}
+    </div>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
-    </script>
-</body>
+    <div class = "container-fluid" id="graph">
+        <h4 class="text-uppercase font-weight-bold text-center">Bikes available at selected station today</h4>
+        <div class="row">
+            <div class = "col-sm-6" id = "occupancy-bar">
+                    {% include "occupancy.html" %}
+            </div>
+            <div class = "col-sm-6" id="bikechart-bar">
+                    {% include "model.html" %}
+            </div>
+        </div>
+    </div>
+    <div class = "container-fluid" id="footer">
+        <div class= "row" style="padding-top:10px">
+            <div  class="col-sm-4" id="footer-links">
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-8" id="footer-info">
+                <p style="text-align:left" rgin>@2018 UCD Bikers. All rights reserved.</p>
+            </div>
+          </div>
+    </div>
+       {% include 'map.js' %}
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcsyUCYwj08f1cku32z86GAq-LgzoY8is&libraries=places&callback=initMap">2
+        </script>
+    </body>
 </html>

@@ -1,5 +1,6 @@
 <script>
 // Script so set up the map with station markers
+
 function initMap(){
 
       // Iitialise the map station and center
@@ -207,7 +208,6 @@ function initMap(){
 	};
 
 
-
 // Create the search box and link it to the UI element.
         var input = document.getElementById('place_search');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -217,6 +217,7 @@ function initMap(){
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
+
 
 // Process input from search box
 searchBox.addListener('places_changed', function() {
@@ -273,7 +274,6 @@ searchBox.addListener('places_changed', function() {
 
         });
 
-
   var infoMark = false;}
 
 
@@ -297,6 +297,5 @@ function generateContent(respon,i){
  	return str;
 
  }
-
 
 </script>

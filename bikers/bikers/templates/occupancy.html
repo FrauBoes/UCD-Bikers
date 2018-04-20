@@ -1,5 +1,3 @@
-<!--Script to -->
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -11,15 +9,15 @@
 	var options
 
 
-    // Create occupancy chartb
+    // Create occupancy chart
 	function drawChart() {
 		var initlizeData = {{ data | safe }};
 		var data = google.visualization.arrayToDataTable(initlizeData);
 
 		// Set chart options
 	  	options = {
+	  	title: "Normal availability",
 	    legend: {position: 'none'},
-	    //curveType: 'function',
 	    height:300,
 	    animation:{
         duration: 1000,
@@ -28,13 +26,14 @@
         'tooltip' : {
             trigger: 'none'
             },
-
+        // Labels for x-axis
 	    hAxis: { ticks: [{v:6.0, f:'06:00'},{v:8.0, f:'08:00'},{v:10.0, f:'10:00'},{v:12.0, f:'12:00'},{v:14.0, f:'14:00'},{v:16.0, f:'16:00'},{v:18.0, f:'18:00'},{v:20.0, f:'20:00'},{v:22.0, f:'22:00'},{v:24.0, f:'24:00'}],
                 viewWindow: { min: 5, max: 24},
                 gridlines: { color: 'transparent'},
 
 	    },
-
+            
+        // Labels for y-axis
         vAxis :{
             viewWindow: {   min: 0,     max: 100},
 
